@@ -208,6 +208,22 @@ svg { width: 20px; height: 20px; fill: currentColor; }
 .side-status i, .dot-good { width: 8px; height: 8px; border-radius: 50%; background: var(--good); display: inline-block; }
 
 /* section headings with a fold arrow, after baileyelith.com: ▾ open, ▸ closed */
+/* Messages / Files tabs and the file gallery */
+.pane-tabs { display: flex; gap: 4px; padding: 8px 28px 0; border-bottom: 1px solid var(--line); background: var(--app); }
+.pane-tab {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 12px 10px; border-bottom: 2px solid transparent;
+  color: var(--muted); font-weight: 600; font-size: 0.92rem;
+}
+.pane-tab:hover { color: var(--ink); }
+.pane-tab.is-on { color: var(--ink); border-bottom-color: var(--accent); }
+.tab-count { color: var(--muted); font-weight: 400; }
+.files-panel { flex: 1; overflow-y: auto; padding: 24px 28px 60px; }
+.files-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); gap: 18px; max-width: 1000px; }
+.file-card { display: flex; flex-direction: column; gap: 8px; }
+.file-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); background: var(--card); }
+.file-name { color: var(--muted); }
+
 /* Bailey-style touches: hashtag chips, an "available" dot, a header icon, a + button, a richer float button */
 .hash-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: -6px 0 14px; }
 .hash-tag { padding: 3px 9px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 500; }
@@ -539,6 +555,8 @@ svg { width: 20px; height: 20px; fill: currentColor; }
 /* ---------------- phone ---------------- */
 /* The intro message IS the first screen. The channel list slides in from a button. */
 @media (max-width: 767px) {
+  .pane-tabs { padding: 6px 16px 0; }
+  .files-panel { padding: 16px 16px 48px; }
   .role-head { grid-template-columns: 36px minmax(0, 1fr); gap: 10px; align-items: start; }
   .org-logo { width: 36px; height: 36px; border-radius: 9px; }
   .org-initials { font-size: 0.78rem; }
