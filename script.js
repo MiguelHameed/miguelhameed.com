@@ -49,7 +49,9 @@
   const avatarEl = (cls, alt) => P.avatar
     ? `<img class="${cls}" src="${esc(P.avatar)}" alt="${esc(alt)}" width="44" height="44" loading="lazy" />`
     : `<span class="${cls} avatar-mark"${alt ? ` role="img" aria-label="${esc(alt)}"` : ' aria-hidden="true"'}>mh</span>`;
-  $$('[data-headshot]').forEach((el) => { el.outerHTML = avatarEl('side-avatar', ''); });
+  // the same icon with a green "available" dot, used where it stands for Miguel himself
+  const avatarLive = (cls, alt) => `<span class="avatar-live">${avatarEl(cls, alt)}<i class="live-dot" title="Open to work anywhere"></i></span>`;
+  $$('[data-headshot]').forEach((el) => { el.outerHTML = avatarLive('side-avatar', ''); });
 
   const manilaTime = () => new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Manila', hour: 'numeric', minute: '2-digit' }).format(new Date());
 
@@ -90,12 +92,13 @@
     return `
       <div class="day mono" id="intro" data-section="intro">pinned</div>
       <article class="msg reveal">
-        ${avatarEl('msg-avatar', P.name)}
+        ${avatarLive('msg-avatar', P.name)}
         <div class="msg-body">
           <div class="msg-meta"><span class="msg-name">${esc(P.shortName)}</span><span class="msg-time mono"><span data-clock>${manilaTime()}</span> in Quezon City</span></div>
           <div class="intro-grid">
             <div class="intro-main">
               <p class="lede"><span class="before">${esc(P.storyStart)}</span> ${esc(P.story)}</p>
+              ${S.tags && S.tags.length ? `<p class="hash-tags">${S.tags.map((t) => `<span class="hash-tag mono">#${esc(t)}</span>`).join('')}</p>` : ''}
               ${buttons('data-intro-actions')}
               <ul class="highlights">${S.highlights.map((h) => `<li>${esc(h)}</li>`).join('')}</ul>
               <div class="chips">
@@ -220,6 +223,8 @@
   feed.innerHTML = intro() + CHANNELS.map((c) => builders[c.id](c)).join('');
 
   // ---------- where am I? (highlight the channel you're reading) ----------
+  const headIcon = $('[data-head-avatar]');
+  if (headIcon) headIcon.outerHTML = avatarLive('head-avatar', '');
   const titleEl = $('#pane-title');
   const subEl = $('#pane-sub');
   function setActive(id) {
@@ -253,6 +258,7 @@
   // ---------- floating "Email me": only when no other contact buttons are on screen ----------
   const floatBtn = $('#float-btn');
   floatBtn.href = 'mailto:' + P.email;
+  floatBtn.innerHTML = `${avatarEl('float-avatar', '')}<span class="float-text"><strong>Email me</strong><span class="float-sub mono">${esc(P.availability)}</span></span>`;
   $$('[data-mail]').forEach((a) => { a.href = 'mailto:' + P.email; });
   const visibleButtons = new Set();
   function setFloat() {

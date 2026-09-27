@@ -208,6 +208,29 @@ svg { width: 20px; height: 20px; fill: currentColor; }
 .side-status i, .dot-good { width: 8px; height: 8px; border-radius: 50%; background: var(--good); display: inline-block; }
 
 /* section headings with a fold arrow, after baileyelith.com: ▾ open, ▸ closed */
+/* Bailey-style touches: hashtag chips, an "available" dot, a header icon, a + button, a richer float button */
+.hash-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: -6px 0 14px; }
+.hash-tag { padding: 3px 9px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+.avatar-live { position: relative; display: inline-flex; flex: none; align-self: start; height: -moz-fit-content; height: fit-content; }
+.live-dot {
+  position: absolute; right: -2px; bottom: -2px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--good); border: 2px solid var(--app);
+}
+.side-avatar + .live-dot { width: 8px; height: 8px; border-width: 1.5px; border-color: var(--side); }
+.head-avatar { width: 36px; height: 36px; border-radius: 9px; font-size: 0.78rem; }
+.head-avatar + .live-dot { width: 10px; height: 10px; }
+.side-head-row { display: flex; align-items: center; gap: 8px; }
+.side-plus {
+  margin-left: auto; display: grid; place-items: center;
+  width: 26px; height: 26px; border-radius: 8px;
+  background: var(--side-hover); color: var(--ink);
+  font-size: 1.05rem; line-height: 1; text-decoration: none;
+}
+.side-plus:hover { background: var(--accent); color: var(--accent-ink); }
+.float-avatar { width: 30px; height: 30px; border-radius: 9px; font-size: 0.72rem; }
+.float-text { display: flex; flex-direction: column; line-height: 1.15; text-align: left; }
+.float-sub { opacity: 0.75; font-size: 0.66rem; }
 .side-label {
   display: flex; align-items: center; gap: 4px; width: 100%;
   margin-top: 10px; padding: 6px 8px; border-radius: 8px;
@@ -349,7 +372,7 @@ svg { width: 20px; height: 20px; fill: currentColor; }
   bottom: max(24px, env(safe-area-inset-bottom));
   z-index: 30;
   display: inline-flex; align-items: center; gap: 8px;
-  min-height: 48px; padding: 12px 20px;
+  min-height: 48px; padding: 8px 18px 8px 8px;
   border-radius: 99px;
   background: var(--accent); color: var(--accent-ink);
   font-weight: 600; text-decoration: none;
@@ -532,6 +555,7 @@ svg { width: 20px; height: 20px; fill: currentColor; }
   .app-bar { display: none; }
 
   .pane { overflow: visible; }
+  .avatar-live:has(.head-avatar) { display: none; }
   .pane-head {
     position: sticky; top: 0; z-index: 20;
     padding: 8px 12px;

@@ -28,6 +28,9 @@ window.SITE = {
   },
 
   // What the intro message lists under "what I do".
+  // Slack-style tags under the opening line (after baileyelith.com). Drawn from his approved highlights.
+  tags: ['marketing-operations', 'business-development', 'ai-workflows'],
+
   // Approved by Miguel 22 Sep. Order follows the pipeline: find, reach, give them something to read, speed it up with AI.
   highlights: [
     'Pipeline management: finding, checking and qualifying leads and partners',
