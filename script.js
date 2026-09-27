@@ -218,9 +218,62 @@
       ${buttons('data-contact-actions')}`) + `<p class="end mono">— end of conversation —</p>`;
   }
 
+  // The Files tab: a gallery of work pictures, with the file name under each (after baileyelith.com).
+  function filesPanel() {
+    return `<div class="files-grid">${S.files.map((f) => `
+      <figure class="file-card">
+        <img src="${esc(f.src)}" alt="${esc(f.caption || f.name)}" loading="lazy" />
+        <figcaption class="file-name mono">${esc(f.name)}</figcaption>
+      </figure>`).join('')}</div>`;
+  }
+
   const builders = { 'selected-work': selectedWork, experience, skills, proof, testimonials, about, contact };
   const feed = $('#feed');
   feed.innerHTML = intro() + CHANNELS.map((c) => builders[c.id](c)).join('');
+
+  // Files tab + Messages tab, shown only when there are files to show
+  if (S.files && S.files.length) {
+    const tabs = document.createElement('div');
+    tabs.className = 'pane-tabs';
+    tabs.innerHTML = `
+      <button class="pane-tab is-on" type="button" data-tab="messages">Messages</button>
+      <button class="pane-tab" type="button" data-tab="files">Files <span class="tab-count mono">${S.files.length}</span></button>`;
+    $('.pane-head').insertAdjacentElement('afterend', tabs);
+    const panel = document.createElement('div');
+    panel.className = 'files-panel';
+    panel.hidden = true;
+    panel.innerHTML = filesPanel();
+    feed.insertAdjacentElement('afterend', panel);
+    $$('.pane-tab').forEach((b) => b.addEventListener('click', () => {
+      const files = b.dataset.tab === 'files';
+      $$('.pane-tab').forEach((x) => x.classList.toggle('is-on', x === b));
+      feed.hidden = files;
+      panel.hidden = !files;
+    }));
+  }
+
+  // Live sites: links out to real published work, above the channel list
+  if (S.liveSites && S.liveSites.length) {
+    const head = document.createElement('button');
+    head.className = 'side-label';
+    head.type = 'button';
+    head.setAttribute('aria-expanded', 'true');
+    head.setAttribute('aria-controls', 'live-list');
+    head.innerHTML = '<svg class="caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8.5h12l-6 7.5z"/></svg>Live sites';
+    const list = document.createElement('ul');
+    list.className = 'side-list';
+    list.id = 'live-list';
+    list.innerHTML = S.liveSites.map((l) =>
+      `<li><a class="side-link" href="${esc(l.url)}" target="_blank" rel="noopener"><span class="hash">↗</span>${esc(l.label)}</a></li>`).join('');
+    const firstLabel = $('.side-label');
+    firstLabel.parentNode.insertBefore(head, firstLabel);
+    firstLabel.parentNode.insertBefore(list, firstLabel);
+    head.addEventListener('click', () => {
+      const open = head.getAttribute('aria-expanded') !== 'true';
+      head.setAttribute('aria-expanded', String(open));
+      list.hidden = !open;
+    });
+  }
 
   // ---------- where am I? (highlight the channel you're reading) ----------
   const headIcon = $('[data-head-avatar]');

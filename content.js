@@ -24,7 +24,7 @@ window.SITE = {
     cv: 'cv.pdf',
     motto: "I get closer, fix what's broken, and keep things moving.", // chosen by Miguel 22 Sep
     headshot: 'images/headshot.jpg', // Miguel's graduation portrait (22 Sep), for now; studio headshot coming
-    avatar: null, // small chat icons: Miguel wants a DIFFERENT picture there (22 Sep); until then they show the mh mark
+    avatar: 'images/headshot-avatar.jpg', // small chat icons: face crop of his portrait (28 Sep)
   },
 
   // What the intro message lists under "what I do".
@@ -157,6 +157,15 @@ window.SITE = {
     { kind: 'Training · Department of Health', title: 'Health data quality and analysis', topic: 'Data management, data quality checks for Universal Health Care, and a recognition for cross-program data analysis (2025).' },
     { kind: 'Certificate · NIDA Clinical Trials Network', title: 'Clinical research foundations', topic: 'Foundational principles of clinical research (2022).' },
   ],
+
+  // Work pictures for the "Files" tab beside "Messages". The tab only appears once there is at least one.
+  // Each entry: { name: 'content-board.png', src: 'images/work/content-board.png', caption: 'optional line' }
+  // Keep every screenshot free of client names and private details.
+  files: [],
+
+  // Links out to real, published things ("Live sites" in the sidebar, after baileyelith.com).
+  // The section only appears once there is at least one. Each entry: { label: 'MAPA', url: 'https://…' }
+  liveSites: [],
 
   testimonials: [], // TODO: real quotes only, with name and role. The channel stays hidden until there are two.
 
