@@ -11,7 +11,7 @@ window.SITE = {
 
   person: {
     name: 'Miguel Irfan Hameed',
-    shortName: 'Miguel Hameed',
+    shortName: 'Miguel Irfan Hameed', // what the header and every message shows
     role: 'Marketing Operations Specialist', // Miguel's main target (22 Sep); Technical Operations is the second track
     // Story line chosen by Miguel (22 Sep), shown two-tone (after alicezhao.work): the start in grey, the rest in full colour.
     storyStart: 'Grounded in science, fluent in data,',
@@ -21,10 +21,11 @@ window.SITE = {
     email: 'miguelhameed@gmail.com',
     linkedin: 'https://www.linkedin.com/in/miguelhameed',
     linkedinLabel: 'linkedin.com/in/miguelhameed',
+    instagram: 'https://www.instagram.com/miggybop/', // set to null to take it off the site
     cv: 'cv.pdf',
     motto: "I get closer, fix what's broken, and keep things moving.", // chosen by Miguel 22 Sep
     headshot: 'images/headshot.jpg', // Miguel's graduation portrait (22 Sep), for now; studio headshot coming
-    avatar: 'images/headshot-avatar.jpg', // small chat icons: face crop of his portrait (28 Sep)
+    avatar: 'images/headshot-avatar.jpg?v=2', // small chat icons: same crop as the big photo (28 Sep). Bump ?v= when the file changes so browsers refetch it.
   },
 
   // What the intro message lists under "what I do".

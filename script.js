@@ -15,26 +15,29 @@
     : esc(t);
 
   // ---------- channels (in the order they appear in the conversation) ----------
+  // Order agreed with Miguel: Work opens as its own view; the rest read as one scroll.
   const CHANNELS = [
-    { id: 'selected-work', title: 'selected-work', sub: 'Results from systems I built' },
-    { id: 'experience', title: 'experience', sub: 'Where I have worked' },
-    { id: 'skills', title: 'skills', sub: 'Tools and strengths' },
-    { id: 'proof', title: 'proof', sub: 'Certifications, training and projects' },
-    ...(S.testimonials.length >= 2 ? [{ id: 'testimonials', title: 'testimonials', sub: 'What people say' }] : []),
-    { id: 'about', title: 'about', sub: 'My story' },
-    { id: 'contact', title: 'contact', sub: 'Get in touch' },
+    { id: 'selected-work', title: 'Work', sub: 'Results from systems I built', view: true },
+    { id: 'about', title: 'About', sub: 'My story' },
+    { id: 'skills', title: 'Skills', sub: 'Tools and strengths' },
+    { id: 'experience', title: 'Experience', sub: 'Where I have worked' },
+    { id: 'proof', title: 'Proof', sub: 'Certifications, training and projects' },
+    ...(S.testimonials.length >= 2 ? [{ id: 'testimonials', title: 'Testimonials', sub: 'What people say' }] : []),
+    { id: 'contact', title: 'Contact', sub: 'Get in touch' },
   ];
 
   // Small app icons for the sidebar, like app tiles in a chat workspace.
   const ICONS = {
     linkedin: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.5H3.56V20h3.38V8.5zM5.25 3.5a1.96 1.96 0 1 0 0 3.92 1.96 1.96 0 0 0 0-3.92zM20.44 13.2c0-3.1-1.65-4.94-4.3-4.94-1.94 0-2.8 1.07-3.29 1.82V8.5H9.48V20h3.37v-5.7c0-1.5.28-2.96 2.14-2.96 1.83 0 1.86 1.72 1.86 3.06V20h3.38l.01-6.8z"/></svg>',
-    email: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h15A1.5 1.5 0 0 1 21 6.5v11a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5v-11zm2 .9v9.6h14V7.4l-7 5.1-7-5.1zM6.7 7h10.6L12 10.9 6.7 7z"/></svg>',
+    email: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ffffff" d="M3 6h18v12H3z"/><path fill="#4285F4" d="M20.4 19h-2.1V9.9L12 14.3 5.7 9.9V19H3.6A1.6 1.6 0 0 1 2 17.4V6.6C2 5.7 2.7 5 3.6 5h.7L12 10.6 19.7 5h.7c.9 0 1.6.7 1.6 1.6v10.8c0 .9-.7 1.6-1.6 1.6z"/><path fill="#34A853" d="M2 17.4V8.1l3.7 2.6V19H3.6A1.6 1.6 0 0 1 2 17.4z"/><path fill="#FBBC04" d="M22 17.4c0 .9-.7 1.6-1.6 1.6h-2.1v-8.3L22 8.1z"/><path fill="#EA4335" d="M2 6.6C2 5.7 2.7 5 3.6 5h.7L12 10.6 19.7 5h.7c.9 0 1.6.7 1.6 1.6v1.5L12 14.9 2 8.1z"/></svg>',
     cv: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2.5h8.5L19 7v13a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 20V4a1.5 1.5 0 0 1 1-1.5zm1 2V19.5h10V8h-4V4.5H7zm2 7h6v1.6H9v-1.6zm0 3.4h6v1.6H9v-1.6z"/></svg>',
+    instagram: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.22 1 .48 1.4.9.4.4.7.8.9 1.4.17.4.37 1 .42 2.2.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.05 1.2-.25 1.8-.42 2.2-.22.6-.48 1-.9 1.4-.4.4-.8.7-1.4.9-.4.17-1 .37-2.2.42-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.05-1.8-.25-2.2-.42-.6-.22-1-.48-1.4-.9-.4-.4-.7-.8-.9-1.4-.17-.4-.37-1-.42-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.05-1.2.25-1.8.42-2.2.22-.6.48-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.17 1-.37 2.2-.42C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.8.07-1.1.05-1.7.24-2.1.4-.5.2-.9.44-1.3.84-.4.4-.64.8-.84 1.3-.16.4-.35 1-.4 2.1C2.5 9.5 2.5 9.9 2.5 13s0 3.5.07 4.8c.05 1.1.24 1.7.4 2.1.2.5.44.9.84 1.3.4.4.8.64 1.3.84.4.16 1 .35 2.1.4 1.3.07 1.7.07 4.8.07s3.5 0 4.8-.07c1.1-.05 1.7-.24 2.1-.4.5-.2.9-.44 1.3-.84.4-.4.64-.8.84-1.3.16-.4.35-1 .4-2.1.07-1.3.07-1.7.07-4.8s0-3.5-.07-4.8c-.05-1.1-.24-1.7-.4-2.1-.2-.5-.44-.9-.84-1.3-.4-.4-.8-.64-1.3-.84-.4-.16-1-.35-2.1-.4C15.5 4 15.1 4 12 4z"/><path d="M12 7.2A4.8 4.8 0 1 0 12 16.8 4.8 4.8 0 0 0 12 7.2zm0 7.9a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2z"/><circle cx="17" cy="7" r="1.15"/></svg>',
     notes: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v2H5zm0 5h14v2H5zm0 5h9v2H5z"/></svg>',
   };
   const APPS = [
     { label: 'LinkedIn', href: P.linkedin, ext: true, icon: 'linkedin' },
     { label: 'Email', href: 'mailto:' + P.email, icon: 'email' },
+    ...(P.instagram ? [{ label: 'Instagram', href: P.instagram, ext: true, icon: 'instagram' }] : []),
     ...(S.showCv === false ? [] : [{ label: 'CV (PDF)', href: P.cv, ext: true, icon: 'cv' }]),
     ...(S.notes ? [{ label: 'Notes', href: S.notes, ext: true, icon: 'notes' }] : []),
   ];
@@ -229,7 +232,32 @@
 
   const builders = { 'selected-work': selectedWork, experience, skills, proof, testimonials, about, contact };
   const feed = $('#feed');
-  feed.innerHTML = intro() + CHANNELS.map((c) => builders[c.id](c)).join('');
+  const scrollChannels = CHANNELS.filter((c) => !c.view);
+  feed.innerHTML = intro() + scrollChannels.map((c) => builders[c.id](c)).join('');
+
+  // Channels marked `view: true` open on their own, like a separate page (after baileyelith.com).
+  const views = {};
+  CHANNELS.filter((c) => c.view).forEach((c) => {
+    const panel = document.createElement('div');
+    panel.className = 'channel-view';
+    panel.hidden = true;
+    panel.innerHTML = `<button class="view-back" type="button" data-view-back>← Back to messages</button>` + builders[c.id](c);
+    const heading = panel.querySelector('.channel-divider'); // the header already names the channel
+    if (heading) { heading.classList.add('sr-only'); }
+    feed.insertAdjacentElement('afterend', panel);
+    views[c.id] = panel;
+  });
+  let openView = null;
+  function showView(id) {
+    openView = id;
+    feed.hidden = !!id;
+    Object.entries(views).forEach(([k, el]) => {
+      el.hidden = k !== id;
+      if (k === id) el.querySelectorAll('.reveal').forEach((r) => r.classList.add('in'));
+    });
+    if (id) { setActive(id); $('.pane').scrollTop = 0; }
+  }
+  $$('[data-view-back]').forEach((b) => b.addEventListener('click', () => { showView(null); setActive('intro'); }));
 
   // Files tab + Messages tab, shown only when there are files to show
   if (S.files && S.files.length) {
@@ -288,9 +316,19 @@
     $$('.rail-btn[data-rail]').forEach((b) => b.classList.toggle('is-active',
       c ? (c.id === 'selected-work' ? b.dataset.rail === 'work' : false) : b.dataset.rail === 'home'));
   }
+  $$('a[href^="#"]').forEach((link) => {
+    const id = link.getAttribute('href').slice(1);
+    const isView = CHANNELS.some((c) => c.view && c.id === id);
+    link.addEventListener('click', (e) => {
+      if (isView) { e.preventDefault(); showView(id); }
+      else if (openView) { showView(null); }
+    });
+  });
+
   const sections = $$('[data-section]');
   let current = 'intro';
   const spy = new IntersectionObserver((entries) => {
+    if (openView) return; // the open view sets the title itself
     entries.forEach((e) => { if (e.isIntersecting) current = e.target.dataset.section; });
     setActive(current);
   }, { rootMargin: '0px 0px -75% 0px', threshold: 0 });
