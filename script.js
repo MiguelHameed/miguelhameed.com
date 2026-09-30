@@ -17,7 +17,7 @@
     { id: 'experience', title: 'Experience', sub: 'Where I have worked' },
     { id: 'proof', title: 'Proof', sub: 'Certifications, training and projects' },
     ...(S.testimonials.length >= 2 ? [{ id: 'testimonials', title: 'Testimonials', sub: 'What people say' }] : []),
-    { id: 'contact', title: 'Contact', sub: 'Get in touch' },
+    { id: 'contact', title: 'Contact', sub: 'Find a time to talk' },
   ];
 
   const ICONS = {
@@ -64,11 +64,11 @@
     <h2 class="channel-divider" id="${c.id}" data-section="${c.id}">
       <span class="hash">#</span>${c.title}<span class="divider-sub">${esc(c.sub)}</span>
     </h2>`;
-  const buttons = (attr = '') => `
+  const buttons = (attr = '', withLinkedIn = true) => `
     <div class="actions" ${attr}>
       ${S.showCv === false ? '' : `<a class="btn btn-primary" href="${esc(P.cv)}" target="_blank" rel="noopener">Download CV</a>`}
-      <a class="btn ${S.showCv === false ? 'btn-primary' : ''}" href="mailto:${esc(P.email)}">Let's connect!</a>
-      <a class="btn" href="${esc(P.linkedin)}" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="btn ${S.showCv === false ? 'btn-primary' : ''}" href="mailto:${esc(P.email)}">Let's find a time!</a>
+      ${withLinkedIn ? `<a class="btn" href="${esc(P.linkedin)}" target="_blank" rel="noopener">LinkedIn ↗</a>` : ''}
     </div>`;
 
   function introPhoto() {
@@ -234,7 +234,7 @@
         <li><span class="label">based in</span><span>${esc(P.location)} · <span data-clock>${manilaTime()}</span> local time</span></li>
         <li><span class="label">status</span><span><i class="dot-good"></i> ${esc(P.availability)}</span></li>
       </ul>
-      ${buttons('data-contact-actions')}`) + `<p class="end">— end of conversation —</p>`;
+      ${buttons('data-contact-actions', false)}`) + `<p class="end">— end of conversation —</p>`;
   }
 
   function filesPanel() {
@@ -280,11 +280,22 @@
   }
   $$('[data-view-back]').forEach((b) => b.addEventListener('click', () => { history.back(); }));
 
+  const VIEW_PATH = { 'selected-work': 'work/' };
+  const ROOT = location.pathname.replace(/index\.html$/, '').replace(/work\/?$/, '').replace(/\/?$/, '/');
+  const urlFor = (id) => ROOT + (id && VIEW_PATH[id] ? VIEW_PATH[id] : '');
+  const viewFromPath = () => {
+    const rest = location.pathname.slice(ROOT.length).replace(/index\.html$/, '');
+    const hit = Object.keys(VIEW_PATH).find((id) => VIEW_PATH[id].replace(/\/$/, '') === rest.replace(/\/$/, ''));
+    return hit || null;
+  };
+
   function openFromHash(replace) {
-    const id = location.hash.slice(1);
-    const isView = CHANNELS.some((c) => c.view && c.id === id);
-    showView(isView ? id : null);
-    if (replace) history.replaceState({ view: isView ? id : null }, '');
+    const hashId = location.hash.slice(1);
+    const hashIsView = CHANNELS.some((c) => c.view && c.id === hashId);
+    const id = hashIsView ? hashId : viewFromPath();
+    showView(id);
+    if (hashIsView) history.replaceState({ view: id }, '', urlFor(id));
+    else if (replace) history.replaceState({ view: id }, '');
   }
   window.addEventListener('hashchange', () => openFromHash(true));
   window.addEventListener('popstate', (e) => {
@@ -350,9 +361,17 @@
   $$('a[href^="#"]').forEach((link) => {
     const id = link.getAttribute('href').slice(1);
     const isView = CHANNELS.some((c) => c.view && c.id === id);
+    if (isView) link.setAttribute('href', urlFor(id));
     link.addEventListener('click', (e) => {
-      if (isView) { e.preventDefault(); history.pushState({ view: id }, '', '#' + id); showView(id); }
-      else if (openView) { showView(null); }
+      if (isView) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return; // let the browser open a new tab
+        e.preventDefault();
+        history.pushState({ view: id }, '', urlFor(id));
+        showView(id);
+      } else if (openView) {
+        history.pushState({ view: null }, '', urlFor(null) + link.getAttribute('href'));
+        showView(null);
+      }
     });
   });
 
@@ -382,7 +401,7 @@
   const floatX = $('#float-x');
   floatLink.href = 'mailto:' + P.email;
   floatLink.innerHTML = `<span class="float-app">${ICONS.email}</span>`
-    + `<span class="float-text"><strong>Let's connect!</strong><span class="float-sub">${esc(P.email)}</span></span>`
+    + `<span class="float-text"><strong>Let's find a time!</strong><span class="float-sub">${esc(P.email)}</span></span>`
     + `<span class="float-when">now</span>`;
   $$('[data-mail]').forEach((a) => { a.href = 'mailto:' + P.email; });
   let floatDismissed = false;
