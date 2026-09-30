@@ -26,12 +26,11 @@
   <meta name="twitter:image" content="https://miguelhameed.com/og-image.png" />
   <link rel="preload" href="fonts/inter-700.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin />
-  <!-- The page is drawn by these two, so the browser should start fetching them now rather than when it
-       reaches the bottom of the body. Without this, the opening line waits on their discovery. -->
-  <link rel="preload" href="content.js" as="script" />
-  <link rel="preload" href="script.js" as="script" />
-  <!-- The analytics script is on another origin; opening the connection early saves the handshake. -->
-  <link rel="preconnect" href="https://gc.zgo.at" crossorigin />
+  <!-- No preload on content.js and script.js: it was tried on 1 Oct and measured, and it changed nothing.
+       JavaScript execution time is 0.0s — the scripts were never what the opening line was waiting for. -->
+  <!-- The counter posts to this origin, so opening the connection early saves the handshake. It is the
+       endpoint, not gc.zgo.at where the script file lives; that distinction cost a measurement to find. -->
+  <link rel="preconnect" href="https://miguelhameed.goatcounter.com" crossorigin />
   <link rel="stylesheet" href="fonts/fonts.css" />
   <link rel="manifest" href="site.webmanifest" />
   <script type="application/ld+json">
