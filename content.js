@@ -1,11 +1,5 @@
-// All of the site's words live here. Edit text in this file; the design reads from it.
-// Anything marked TODO is waiting on Miguel and shows on the page as a visible placeholder.
 
 window.SITE = {
-  // Publishing switches (Miguel, 27 Sep — option A for the first push):
-  //   showCv: false   -> the CV button and the CV app link are hidden until a cleaned CV (no phone/address) is ready
-  //   hideTodos: true -> unfinished items are left out of the page instead of showing as red placeholders
-  // Set either back to true/false here when the real content is ready. Nothing below is deleted.
   showCv: false,
   hideTodos: true,
 
@@ -13,7 +7,6 @@ window.SITE = {
     name: 'Miguel Irfan Hameed',
     shortName: 'Miguel Irfan Hameed', // what the header and every message shows
     role: 'Marketing Operations Specialist', // Miguel's main target (22 Sep); Technical Operations is the second track
-    // Story line chosen by Miguel (22 Sep), shown two-tone (after alicezhao.work): the start in grey, the rest in full colour.
     storyStart: 'Grounded in science, fluent in data,',
     story: 'I now build the systems that turn strangers into partners.',
     location: 'Quezon City, Philippines',
@@ -28,14 +21,8 @@ window.SITE = {
     avatar: 'images/headshot-avatar.jpg?v=2', // small chat icons: same crop as the big photo (28 Sep). Bump ?v= when the file changes so browsers refetch it.
   },
 
-  // What the intro message lists under "what I do".
-  // Slack-style tags under the opening line (after baileyelith.com). Drawn from his approved highlights.
   tags: ['marketing-operations', 'business-development', 'ai-workflows'],
 
-  // Approved by Miguel 22 Sep. Order follows the pipeline: find, reach, give them something to read, speed it up with AI.
-  // Headline style, chosen by Miguel 29 Sep: a short hook, then the plain fact.
-  // Each is { hook, line } — the hook is set in the accent colour.
-  // Headline style, chosen by Miguel: hook, colon, plain fact. Each links into the matching charter in #Work.
   highlights: [
     { hook: 'Five workstreams, one desk', line: 'partnerships, the website, competitive intelligence, content, outbound.', href: '#selected-work' },
     { hook: 'Owned end to end', line: 'research, enrichment, briefs and sequencing, handed over ready to send.', href: '#selected-work' },
@@ -44,17 +31,8 @@ window.SITE = {
     { hook: 'First pass, last word', line: 'AI drafts the repetitive part; I review everything before it ships.', href: '#selected-work' },
   ],
 
-  // The name of the whole set, shown above the work. Keep it short; the count is added automatically.
-  // Example: 'systems, one workspace' renders as "Four systems, one workspace" when there are four items.
   workSetName: 'workstreams, one desk',
 
-  // Emptied 29 Sep 2026 at Miguel's request: the four cards described work he did not do.
-  // The old text is parked in content-work-cards-removed.txt. The Work channel hides itself while this is empty.
-  // Each entry, when Miguel has real ones:
-  //   { title, category, year, tags: [], result, problem, did, metric, specs: [{ label, value }], shot }
-  //   'specs' are two or three checkable facts, not claims: the tool, the cadence, the volume.
-  //   e.g. specs: [{ value: 'ClickUp', label: 'system' }, { value: 'Weekly', label: 'cadence' }, { value: '23', label: 'records' }]
-  //   'category' and 'year' print beside the number, e.g. "01 — CONTENT OPERATIONS · 2026".
   selectedWork: [
     {
       title: 'Partner pipeline: mine from first search to the moment of contact',
@@ -100,7 +78,6 @@ window.SITE = {
     },
   ],
 
-  // The authority boundary, from the Operating Agreement I work under. His words and mine, not a paraphrase.
   boundary: {
     lede: 'I wrote the agreement this work runs on. It says what I ship on my own judgement, and the short list I hand up.',
     ships: 'Competitive research and teardowns. Account briefs. First drafts of any post, blog or outbound message. Blog review up to editing. Pull requests against staging. ClickUp field and status hygiene. Lead list triage and disqualification.',
@@ -115,26 +92,11 @@ window.SITE = {
       logo: 'images/logos/cloud-sentry.png', // their own mark, from cloudsentry.com (Miguel, 29 Sep)
       place: 'New Hampshire, New England',
       dates: 'April 2025 – Present', // alongside DOH until Jan 2026
-      // Rewritten 30 Sep, approved by Miguel. Every figure traces to a dated entry in the ClickUp evidence
-      // files (E:\Downloads\work-inventory-evidence.md and partner-pipeline-cleanup-evidence.md).
-      // These are finished work; what he OWNS and where it STOPS lives in the Work channel, not here.
-      // Do not add outreach he sent (the manager sends), ClickUp automations (not supported) or any
-      // pipeline outcome — meetings, reply rates, conversions and revenue are all "not found".
       points: [
-        // 23 records / 3 lists / 21 notes: cleanup evidence §2, 2026-09-18. 18→0 is his own dated count,
-        // no second source; Miguel decided 30 Sep to keep it. "all" deliberately left out — 3 more records
-        // surfaced on 09-23 outside the original scope.
         'Audited 23 partner records across three lists in a day, wrote 21 dated notes, and brought eighteen stale records back inside the 14-day rule.',
-        // Charter 3 pack, 2026-09-22 to 23: 4 teardowns, 1 battlecard, 6 objection scripts, 1 one-pager,
-        // 1 win/loss spec, 1 decision memo. Eleven deliverables in two days.
         'Built the sales-enablement pack in two days: four competitor teardowns, a battlecard, six objection scripts, a one-pager, a win/loss spec and a decision memo.',
-        // 24 blog docs 2025-07-01 to 07-25; 72-post corpus review 2026-09-24; a notes comment per post 09-28.
         'Wrote 24 articles for the company blog, then reviewed and annotated the full 72-post corpus.',
-        // 10 verified PRs in the week ending 2026-09-25; 12 Lighthouse reports; site crawl 41 pages at 370px.
-        // He stops at merge — the manager merges — so this says "shipped to", not "shipped".
         'Shipped ten pull requests to the marketing site in one week, backed by twelve Lighthouse audits and a 41-page crawl at phone width.',
-        // Super agents Jan–Mar 2026 (KQL agent demoed 03-16 and 03-23); two AI Skills 2026-08-28
-        // ("1-3-1 Rule", "Client Outreach"); AI credit task opened 2026-09-24, still open — no outcome to claim.
         'Built Cloud Sentry\u2019s ClickUp super agents and two AI Skills, demoed both to the team, and hold the open audit into workspace AI credit use.',
       ],
     },
@@ -174,14 +136,6 @@ window.SITE = {
   education: 'BS Medical Technology, Far Eastern University Manila, 2022. Licensed.',
   educationLogo: 'images/logos/feu.png', // official FEU seal (Wikipedia)
 
-  // Rewritten 30 Sep. Each group leads with what Miguel DOES; the products he uses sit quieter underneath.
-  // Audited against the ClickUp evidence files. Removed as unevidenced: SEO tools (no SEO tool is named
-  // anywhere), ChatGPT (not in the systems list), Slack (the workspace runs on Teams), ClickUp automations
-  // ("not supported" in the evidence), SOC 2 compliance analysis (also forbidden — the Operating Agreement
-  // puts any compliance claim about a client on the manager's side). Google Analytics became GA4, which he
-  // reads rather than runs. Added, all well evidenced: GitHub (staging PRs), Lighthouse (12 reports) and
-  // competitive research (an entire charter at 20% of his week that was missing here).
-  // "Outreach sequencing and replies" is deliberate: he sequences and drafts, the manager sends.
   skills: [
     { group: 'Marketing operations',
       does: ['Content pipeline management', 'Editorial workflows', 'Content writing and editing'],
@@ -201,42 +155,45 @@ window.SITE = {
   ],
   learning: 'Microsoft SC-300 and SC-200', // shown under the skills as "currently learning"
 
-
-  // Proof, agreed with Miguel 22 Sep: current and marketing-relevant items first; lab-only certificates left out.
-  // Items come from his CV. Add `link: 'https://…'` to any card to show a "View" link.
   proof: [
-    { kind: 'Certification', title: 'Certified ClickUp Expert', topic: 'TODO: year earned' },
+    {
+      kind: 'Certification', title: 'Certified ClickUp Expert',
+      topic: "ClickUp's own certification, June 2025. It's the system five of my workstreams run on.",
+      logo: 'images/logos/clickup.png',
+      link: 'https://verify.skilljar.com/c/8a2eyxevcezx',
+      linkLabel: 'Verify on Skilljar',
+      image: 'images/proof/clickup-certificate.jpg',
+      imageAlt: 'ClickUp Certificate of Completion, Expert level, issued 16 June 2025',
+      meta: [
+        { label: 'Issuer', value: 'ClickUp' },
+        { label: 'Issued', value: '16 June 2025' },
+        { label: 'Certificate', value: '8a2eyxevcezx' },
+      ],
+      story: [
+        'ClickUp is where my work actually happens. Five workstreams, their charters, the partner records, the blog pipeline and the weekly figures all live in one workspace, so knowing the tool properly is not optional. It is the difference between a system that holds and one that quietly drifts.',
+        'I took the certification in June 2025. Since then I have built the super agents the team uses, written two AI Skills, and taken on the audit into the workspace’s AI credit use.',
+      ],
+    },
     { kind: 'In progress · startup project', title: 'MAPA: Multi-route Advisory for Passable Alternatives', topic: "A real-time navigation and road-passability app for Metro Manila's drivers and on-demand riders, including flood-prone roads." },
-    { kind: 'Course · Coursera', title: 'Online Course in Management', topic: 'TODO: course name and year' },
     { kind: 'Training · Department of Health', title: 'Health data quality and analysis', topic: 'Data management, data quality checks for Universal Health Care, and a recognition for cross-program data analysis (2025).' },
     { kind: 'Certificate · NIDA Clinical Trials Network', title: 'Clinical research foundations', topic: 'Foundational principles of clinical research (2022).' },
   ],
 
-  // Work pictures for the "Files" tab beside "Messages". The tab only appears once there is at least one.
-  // Each entry: { name: 'content-board.png', src: 'images/work/content-board.png', caption: 'optional line' }
-  // Keep every screenshot free of client names and private details.
   files: [],
 
-  // Links out to real, published things ("Live sites" in the sidebar, after baileyelith.com).
-  // The section only appears once there is at least one. Each entry: { label: 'MAPA', url: 'https://…' }
   liveSites: [],
 
   testimonials: [], // TODO: real quotes only, with name and role. The channel stays hidden until there are two.
 
-  // Miguel's own words (22 Sep), lightly tidied for grammar only. One string per paragraph.
   about: [
-    'Staying relevant has never been more important than in these fast-changing times, and my own path keeps proving it. From a start in medical science to arriving at the intersection of technical operations, compliance and marketing, my career has already evolved more than once.',
-    'I started in medical laboratory science, earning my degree and license from Far Eastern University – Manila, then spent years handling medical data, research and contextual analysis at the DOST Food and Nutrition Research Institute and later the Department of Health, Metro Manila Center for Health Development. Somewhere in that work I noticed how close I already was to living inside data.',
-    'Then came a stretch of sudden, quiet unhappiness, not tied to any one bad day, just a feeling that had settled in and stayed. So I made a decision that did not look like a career move at the time. I started working as a virtual assistant, and it became the opening that pointed me toward where I am now.',
-    'That path led to my current role as an Operations & Business Development Associate at Cloud Sentry Solutions, a managed security and compliance platform, working across ClickUp workflow management, LinkedIn outreach, compliance automation and tool configuration.',
-    'If there is one thing tying all of this together, it is the willingness to keep learning and outgrowing myself. Working with a startup means wearing a lot of hats, and embracing them has been one of the most fulfilling things I have ventured into so far. I feel more alive doing this than I have in a long time.',
-    'My quest for learning and growing continues.',
+    'I fixed a system nobody else could get working, and that was the moment the job changed for me. I trained as a medical technologist and spent years inside health data before I understood what I actually liked was making the work run — finding what was broken, fixing it, and keeping it moving. That’s the job I want now, and I want to be doing it where people can see it.',
+    'Then came a stretch of quiet unhappiness — no single bad day, just a feeling that settled in and stayed. So I made a decision that did not look like a career move: I took work as a virtual assistant, and it turned out to be the opening that led here.',
+    'That path led to Cloud Sentry Solutions, a managed security and compliance company, and to the operations work I do there now.',
+    'I did not expect to enjoy carrying this much at once, but I do. I feel more alive doing this than I have in a long time.',
   ],
 
-  // From what Miguel has said he loves doing (May 2026 chat). Shown as small tags in #about.
   interests: ['Travel', 'Diving', 'Hiking', 'Trekking', 'The gym'],
 
-  // The brand word, shown quietly in #about.
   word: 'Movement',
 
   notes: null, // No Substack yet; the Notes link stays hidden while this is null.

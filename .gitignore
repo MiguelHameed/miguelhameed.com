@@ -3,3 +3,9 @@ _probe.html
 checks/node_modules/
 checks/test-results/
 checks/*.html
+
+# The original certificate scan — the site uses the cropped badge in images/logos/ instead.
+images/Certified ClickUp Expert.jpg
+
+# The badge and certificate originals — the site uses the prepared copies in images/logos and images/proof.
+images/ClickUp Expert, Transparent.png
