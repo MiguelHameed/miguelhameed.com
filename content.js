@@ -33,64 +33,86 @@ window.SITE = {
   tags: ['marketing-operations', 'business-development', 'ai-workflows'],
 
   // Approved by Miguel 22 Sep. Order follows the pipeline: find, reach, give them something to read, speed it up with AI.
+  // Headline style, chosen by Miguel 29 Sep: a short hook, then the plain fact.
+  // Each is { hook, line } — the hook is set in the accent colour.
+  // Headline style, chosen by Miguel: hook, colon, plain fact. Each links into the matching charter in #Work.
   highlights: [
-    'Pipeline management: finding, checking and qualifying leads and partners',
-    'LinkedIn outreach campaigns with Dripify, Sales Navigator and Apollo',
-    'Content operations, from idea to published article',
-    'AI-assisted workflows that save the team time',
+    { hook: 'Five workstreams, one desk', line: 'partnerships, the website, competitive intelligence, content, outbound.', href: '#selected-work' },
+    { hook: 'Owned end to end', line: 'research, enrichment, briefs and sequencing, handed over ready to send.', href: '#selected-work' },
+    { hook: 'House rules', line: 'I wrote the operating agreement the work runs on.', href: '#selected-work' },
+    { hook: 'Order restored', line: 'a partner pipeline untouched since April, current again in a day.', href: '#selected-work' },
+    { hook: 'First pass, last word', line: 'AI drafts the repetitive part; I review everything before it ships.', href: '#selected-work' },
   ],
 
+  // The name of the whole set, shown above the work. Keep it short; the count is added automatically.
+  // Example: 'systems, one workspace' renders as "Four systems, one workspace" when there are four items.
+  workSetName: 'workstreams, one desk',
+
+  // Emptied 29 Sep 2026 at Miguel's request: the four cards described work he did not do.
+  // The old text is parked in content-work-cards-removed.txt. The Work channel hides itself while this is empty.
+  // Each entry, when Miguel has real ones:
+  //   { title, category, year, tags: [], result, problem, did, metric, specs: [{ label, value }], shot }
+  //   'specs' are two or three checkable facts, not claims: the tool, the cadence, the volume.
+  //   e.g. specs: [{ value: 'ClickUp', label: 'system' }, { value: 'Weekly', label: 'cadence' }, { value: '23', label: 'records' }]
+  //   'category' and 'year' print beside the number, e.g. "01 — CONTENT OPERATIONS · 2026".
   selectedWork: [
-    // Card 1, approved by Miguel 22 Sep.
     {
-      title: 'Content Pipeline for a Cybersecurity Blog',
-      tags: ['Content marketing', 'Workflow design'],
-      problem: 'Articles stalled between draft and publish, so the blog had no steady rhythm.',
-      did: 'Built a six-stage workflow in ClickUp (idea, drafting, editing, approved, staging, live), set twice-weekly approval windows on Tuesdays and Thursdays, and kept at least three weeks of articles ready in reserve. Wrote, edited and reviewed cybersecurity and compliance articles myself.',
-      result: '60 articles planned and moved through one clear pipeline, with a three-week reserve built in.',
-      metric: '60 articles',
-      pending: 'TODO: articles published and live', // Miguel to check the count (question C3)
-      shot: null, // TODO: cleaned-up screenshot, with client details removed
+      title: 'Partner pipeline: mine from first search to the moment of contact',
+      category: 'Partner pipeline', year: '30% of my week', tags: ['Research', 'Record hygiene'],
+      owns: 'Finding and enriching partner leads, writing an account brief for each one, sequencing who is approached and when, and keeping every record current under a 14-day rule.',
+      stops: 'I hand each lead over researched, briefed and sequenced, ready for the CEO to send. Stage changes are his call, by design.',
+      result: 'Twenty-three records across three lists, all carrying a dated note and a next step. Eighteen were past the 14-day rule; none were afterwards.',
+      specs: [{ value: 'ClickUp', label: 'system' }, { value: '14 days', label: 'staleness rule' }, { value: '23 records', label: 'across 3 lists' }],
+      metric: '30%', shot: null,
     },
-    // Card 2, approved by Miguel 22 Sep.
     {
-      title: 'LinkedIn Outreach Campaigns',
-      tags: ['Demand generation', 'LinkedIn outreach'],
-      problem: 'The team needed steady conversations with the right people, without sending one generic message to everyone.',
-      did: 'Found and checked prospects in LinkedIn Sales Navigator and Apollo, split them into three audience segments, and ran a separate Dripify campaign for each at the same time. Tracked invitations, acceptances, messages and replies every day, and rolled them into a weekly report.',
-      result: 'Three audience campaigns running at the same time, each with its own daily and weekly reporting.',
-      metric: '3 campaigns',
-      pending: 'TODO: acceptance and reply rates', // Miguel to pull real numbers from Dripify (question C2)
-      shot: null, // TODO: cleaned-up screenshot of a campaign report, with client details removed
+      title: 'Marketing site: I find it, fix it and ship it to staging',
+      category: 'Marketing site', year: '25% of my week', tags: ['QA', 'Staging PRs'],
+      owns: 'Testing the site, reproducing and documenting defects, fixing copy, and opening pull requests against staging.',
+      stops: 'I open the pull request and flag anything that touches positioning, so the CEO reviews it as a decision rather than a code change. Merging is deliberately one person’s job, and that keeps production clean.',
+      specs: [{ value: 'GitHub', label: 'system' }, { value: 'Staging only', label: 'boundary' }, { value: 'Lighthouse', label: 'audits' }],
+      metric: '25%', shot: null,
     },
-    // Card 3, approved by Miguel 22 Sep.
     {
-      title: 'Partner Research and Qualification',
-      tags: ['Partnerships', 'Research'],
-      problem: "Promising partner leads weren't turning into real conversations in the pipeline.",
-      did: 'Researched 11 potential partner companies and wrote a short brief on each: who they are, why they fit, and who to contact. Verified the right contact person for 9 of them, set a six-week cycle to refresh the research, and built a clear hand-over step so qualified partners move straight into the partner pipeline.',
-      result: '8 of 11 potential partners qualified as worth pursuing, with contacts verified for 9 of them.',
-      metric: '8 / 11',
-      shot: null, // TODO: cleaned-up screenshot of a lead brief (blurred), with client details removed
+      title: 'Competitive intelligence: the material the sales side works from',
+      category: 'Competitive intelligence', year: '20% of my week', tags: ['Teardowns', 'Sales enablement'],
+      owns: 'Competitor teardowns, a battlecard, objection handling scripts, and a monitoring run that keeps them current.',
+      stops: 'I write it, he reads it before it reaches a customer. The research, the argument and the words are mine.',
+      result: 'Eleven deliverables and one monitoring run.',
+      specs: [{ value: '11', label: 'deliverables' }, { value: '1', label: 'monitoring run' }, { value: 'Quarterly', label: 'cadence' }],
+      metric: '20%', shot: null,
     },
-    // Card 4, approved by Miguel 22 Sep. (Pipeline Cleanup and Operating Model cards moved to Experience.)
     {
-      title: 'AI Workflow Map for Marketing and Sales',
-      tags: ['AI workflows', 'Marketing operations'],
-      problem: 'The team had AI tools available, but no shared plan for where they actually help.',
-      did: "Mapped where AI fits into the team's daily work in ClickUp: turning one article into several posts, personalising outreach messages, preparing for sales calls, and summarising the pipeline into quick updates.",
-      result: 'A clear map of four places where AI saves the marketing and sales team time.',
-      metric: '4 AI workflows',
-      shot: null, // TODO: cleaned-up screenshot of the map, with client details removed
+      title: 'Content operations: idea to edited, on a schedule',
+      category: 'Content operations', year: '15% of my week', tags: ['Editorial', 'Distribution'],
+      owns: 'Moving blog posts through the pipeline, reviewing and annotating them, and drafting and scheduling social content.',
+      stops: "I take a post from idea to edited and recommend what happens next; publishing is the CEO's to approve. Every draft on the blog and the social calendar is mine.",
+      specs: [{ value: 'ClickUp', label: 'pipeline' }, { value: 'Buffer', label: 'scheduling' }, { value: 'Editing', label: 'last stage I own' }],
+      metric: '15%', shot: null,
+    },
+    {
+      title: 'Outbound list quality: a pipeline worth working',
+      category: 'Outbound list quality', year: '10% of my week', tags: ['Triage', 'Reporting'],
+      owns: 'Triaging outbound records, disqualifying what does not fit, keeping list quality honest, and reporting on campaigns.',
+      stops: 'Routine replies are mine. Anything that needs a human decision I hand over with the context already written.',
+      specs: [{ value: 'Dripify', label: 'system' }, { value: 'Sales Navigator', label: 'sourcing' }, { value: 'Apollo', label: 'enrichment' }],
+      metric: '10%', shot: null,
     },
   ],
+
+  // The authority boundary, from the Operating Agreement I work under. His words and mine, not a paraphrase.
+  boundary: {
+    lede: 'I wrote the agreement this work runs on. It says what I ship on my own judgement, and the short list I hand up.',
+    ships: 'Competitive research and teardowns. Account briefs. First drafts of any post, blog or outbound message. Blog review up to editing. Pull requests against staging. ClickUp field and status hygiene. Lead list triage and disqualification.',
+    gated: 'Merging to production. Moving a post to approved. Anything sent to a person outside the company. Anything with a price, fee or contract term. Any security or compliance claim about a client. Anything that touches positioning.',
+  },
 
   experience: [
     {
       role: 'Operations & Business Development Associate', // Miguel's choice, 22 Sep: Work Summary title, shortened
       type: 'Independent contractor',
       org: 'Cloud Sentry Solutions',
-      logo: null, initials: 'CS', // no logo until Ken okays it (Miguel, 22 Sep)
+      logo: 'images/logos/cloud-sentry.png', // their own mark, from cloudsentry.com (Miguel, 29 Sep)
       place: 'New Hampshire, New England',
       dates: 'April 2025 – Present', // alongside DOH until Jan 2026
       // Marketing-first draft, accepted by Miguel 22 Sep "for now" — he'll refine the details later.

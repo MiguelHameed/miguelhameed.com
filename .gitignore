@@ -1,0 +1,5 @@
+_review.html
+_probe.html
+checks/node_modules/
+checks/test-results/
+checks/*.html
