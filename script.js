@@ -19,7 +19,7 @@
   const CHANNELS = [
     ...(S.selectedWork.length ? [{ id: 'selected-work', title: 'Work', sub: 'What I run, and how far it goes', view: true }] : []),
     { id: 'about', title: 'About', sub: 'My story' },
-    { id: 'skills', title: 'Skills', sub: 'Tools and strengths' },
+    { id: 'skills', title: 'Skills', sub: 'What I do, and what I use' },
     { id: 'experience', title: 'Experience', sub: 'Where I have worked' },
     { id: 'proof', title: 'Proof', sub: 'Certifications, training and projects' },
     ...(S.testimonials.length >= 2 ? [{ id: 'testimonials', title: 'Testimonials', sub: 'What people say' }] : []),
@@ -78,7 +78,7 @@
   const buttons = (attr = '') => `
     <div class="actions" ${attr}>
       ${S.showCv === false ? '' : `<a class="btn btn-primary" href="${esc(P.cv)}" target="_blank" rel="noopener">Download CV</a>`}
-      <a class="btn ${S.showCv === false ? 'btn-primary' : ''}" href="mailto:${esc(P.email)}">Email me</a>
+      <a class="btn ${S.showCv === false ? 'btn-primary' : ''}" href="mailto:${esc(P.email)}">Let's connect!</a>
       <a class="btn" href="${esc(P.linkedin)}" target="_blank" rel="noopener">LinkedIn ↗</a>
     </div>`;
 
@@ -185,11 +185,18 @@
   }
 
   function skills(c) {
-    return divider(c) + msg('skills', S.skills.map((g) => `
+    // What he does leads; the products sit under it in a quieter line. Older groups that still use
+    // `items` fall back to showing everything on the "does" line, so nothing disappears.
+    return divider(c) + msg('skills', S.skills.map((g) => {
+      const does = g.does || g.items || [];
+      const tools = g.tools || [];
+      return `
       <div class="skill-group">
         <h3 class="skill-head">${esc(g.group)}</h3>
-        <ul class="tags tags-lg">${g.items.map((s) => `<li>${esc(s)}</li>`).join('')}</ul>
-      </div>`).join('') + (S.learning ? `
+        ${does.length ? `<p class="skill-does">${does.map(esc).join('<span class="sep"> &middot; </span>')}</p>` : ''}
+        ${tools.length ? `<p class="skill-tools"><span class="label">tools</span> ${tools.map(esc).join(', ')}</p>` : ''}
+      </div>`;
+    }).join('') + (S.learning ? `
       <p class="learning"><span class="label">currently learning</span> ${esc(S.learning)}</p>` : ''));
   }
 
@@ -385,17 +392,31 @@
     $$('.reveal').forEach((el) => rev.observe(el));
   }
 
-  // ---------- floating "Email me": only when no other contact buttons are on screen ----------
+  // ---------- floating contact banner: only when no other contact buttons are on screen ----------
+  // Shaped like a macOS notification: the sending app's icon (Gmail, the same mark the Apps list uses),
+  // a title, the address underneath, and a timestamp. "now" is decorative — it never changes.
   const floatBtn = $('#float-btn');
-  floatBtn.href = 'mailto:' + P.email;
-  floatBtn.innerHTML = `${avatarEl('float-avatar', '')}<span class="float-text"><strong>Email me</strong><span class="float-sub">${esc(P.availability)}</span></span>`;
+  const floatLink = $('#float-link');
+  const floatX = $('#float-x');
+  floatLink.href = 'mailto:' + P.email;
+  floatLink.innerHTML = `<span class="float-app">${ICONS.email}</span>`
+    + `<span class="float-text"><strong>Let's connect!</strong><span class="float-sub">${esc(P.email)}</span></span>`
+    + `<span class="float-when">now</span>`;
   $$('[data-mail]').forEach((a) => { a.href = 'mailto:' + P.email; });
+  // Dismissed for this visit only, so it comes back next time rather than being gone for good.
+  let floatDismissed = false;
+  floatX.addEventListener('click', () => {
+    floatDismissed = true;
+    setFloat();
+    floatLink.blur();
+  });
   const visibleButtons = new Set();
   function setFloat() {
-    const show = visibleButtons.size === 0;
+    const show = visibleButtons.size === 0 && !floatDismissed;
     floatBtn.classList.toggle('is-hidden', !show);
     floatBtn.setAttribute('aria-hidden', String(!show));
-    floatBtn.tabIndex = show ? 0 : -1;
+    floatLink.tabIndex = show ? 0 : -1;
+    floatX.tabIndex = show ? 0 : -1;
   }
   const btnObs = new IntersectionObserver((entries) => {
     entries.forEach((e) => (e.isIntersecting ? visibleButtons.add(e.target) : visibleButtons.delete(e.target)));

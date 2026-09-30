@@ -151,7 +151,13 @@
     </div>
   </div>
 
-  <a class="float-btn" id="float-btn" href="#">Email me</a>
+  <!-- macOS-style notification banner. The dismiss button has to be a sibling of the link, not inside it. -->
+  <div class="float-wrap" id="float-btn">
+    <a class="float-btn" id="float-link" href="#">Let's connect!</a>
+    <button class="float-x" id="float-x" type="button" aria-label="Dismiss">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
 
   <!-- GoatCounter: visitor counts, no cookies, nothing personal. Dashboard: https://miguelhameed.goatcounter.com -->
   <script data-goatcounter="https://miguelhameed.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

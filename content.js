@@ -115,13 +115,27 @@ window.SITE = {
       logo: 'images/logos/cloud-sentry.png', // their own mark, from cloudsentry.com (Miguel, 29 Sep)
       place: 'New Hampshire, New England',
       dates: 'April 2025 – Present', // alongside DOH until Jan 2026
-      // Marketing-first draft, accepted by Miguel 22 Sep "for now" — he'll refine the details later.
+      // Rewritten 30 Sep, approved by Miguel. Every figure traces to a dated entry in the ClickUp evidence
+      // files (E:\Downloads\work-inventory-evidence.md and partner-pipeline-cleanup-evidence.md).
+      // These are finished work; what he OWNS and where it STOPS lives in the Work channel, not here.
+      // Do not add outreach he sent (the manager sends), ClickUp automations (not supported) or any
+      // pipeline outcome — meetings, reply rates, conversions and revenue are all "not found".
       points: [
-        'Manage a 60-article content pipeline for the company blog, and write, edit and review cybersecurity and compliance articles',
-        'Run three LinkedIn outreach campaigns at once in Dripify, with daily and weekly reporting',
-        'Research and qualify partner leads, and cleaned up the partner pipeline so overdue follow-ups dropped from 18 to 0',
-        'Map where AI saves the marketing and sales team time, and build ClickUp automations that cut manual work',
-        'Wrote the operating guide for five workstreams, and run weekly speed and quality checks on the marketing website',
+        // 23 records / 3 lists / 21 notes: cleanup evidence §2, 2026-09-18. 18→0 is his own dated count,
+        // no second source; Miguel decided 30 Sep to keep it. "all" deliberately left out — 3 more records
+        // surfaced on 09-23 outside the original scope.
+        'Audited 23 partner records across three lists in a day, wrote 21 dated notes, and brought eighteen stale records back inside the 14-day rule.',
+        // Charter 3 pack, 2026-09-22 to 23: 4 teardowns, 1 battlecard, 6 objection scripts, 1 one-pager,
+        // 1 win/loss spec, 1 decision memo. Eleven deliverables in two days.
+        'Built the sales-enablement pack in two days: four competitor teardowns, a battlecard, six objection scripts, a one-pager, a win/loss spec and a decision memo.',
+        // 24 blog docs 2025-07-01 to 07-25; 72-post corpus review 2026-09-24; a notes comment per post 09-28.
+        'Wrote 24 articles for the company blog, then reviewed and annotated the full 72-post corpus.',
+        // 10 verified PRs in the week ending 2026-09-25; 12 Lighthouse reports; site crawl 41 pages at 370px.
+        // He stops at merge — the manager merges — so this says "shipped to", not "shipped".
+        'Shipped ten pull requests to the marketing site in one week, backed by twelve Lighthouse audits and a 41-page crawl at phone width.',
+        // Super agents Jan–Mar 2026 (KQL agent demoed 03-16 and 03-23); two AI Skills 2026-08-28
+        // ("1-3-1 Rule", "Client Outreach"); AI credit task opened 2026-09-24, still open — no outcome to claim.
+        'Built Cloud Sentry\u2019s ClickUp super agents and two AI Skills, demoed both to the team, and hold the open audit into workspace AI credit use.',
       ],
     },
     {
@@ -131,9 +145,9 @@ window.SITE = {
       place: 'Mandaluyong City, Philippines',
       dates: 'April 2025 – January 2026',
       points: [
-        'Managed and validated health facility data for the Field Health Services Information System (FHSIS)',
-        'Coordinated with local health units and partner facilities for timely, complete, standardised data',
-        'Reviewed, consolidated and analysed routine health reports to support monitoring and planning',
+        'Managed and validated health facility data for the Field Health Services Information System (FHSIS).',
+        'Coordinated with local health units and partner facilities for timely, complete, standardised data.',
+        'Reviewed, consolidated and analysed routine health reports to support monitoring and planning.',
       ],
     },
     {
@@ -143,8 +157,8 @@ window.SITE = {
       place: 'Taguig City, Philippines',
       dates: 'November 2023 – August 2024',
       points: [
-        'Conducted data collection and validation for the National Nutrition Survey',
-        'Collected and processed biological samples through phlebotomy; performed laboratory analysis of biochemical markers',
+        'Conducted data collection and validation for the National Nutrition Survey.',
+        'Collected and processed biological samples through phlebotomy; performed laboratory analysis of biochemical markers.',
       ],
     },
     {
@@ -153,20 +167,37 @@ window.SITE = {
       logo: 'images/logos/dost-fnri.png', // FNRI emblem, from fnri.dost.gov.ph
       place: 'Taguig City, Philippines',
       dates: 'September – November 2023',
-      points: ['Encoded and validated National Nutrition Survey data'],
+      points: ['Encoded and validated National Nutrition Survey data.'],
     },
   ],
 
   education: 'BS Medical Technology, Far Eastern University Manila, 2022. Licensed.',
   educationLogo: 'images/logos/feu.png', // official FEU seal (Wikipedia)
 
-  // Marketing-first groups, approved by Miguel 22 Sep. Only tools he has actually used.
+  // Rewritten 30 Sep. Each group leads with what Miguel DOES; the products he uses sit quieter underneath.
+  // Audited against the ClickUp evidence files. Removed as unevidenced: SEO tools (no SEO tool is named
+  // anywhere), ChatGPT (not in the systems list), Slack (the workspace runs on Teams), ClickUp automations
+  // ("not supported" in the evidence), SOC 2 compliance analysis (also forbidden — the Operating Agreement
+  // puts any compliance claim about a client on the manager's side). Google Analytics became GA4, which he
+  // reads rather than runs. Added, all well evidenced: GitHub (staging PRs), Lighthouse (12 reports) and
+  // competitive research (an entire charter at 20% of his week that was missing here).
+  // "Outreach sequencing and replies" is deliberate: he sequences and drafts, the manager sends.
   skills: [
-    { group: 'Marketing operations', items: ['Content pipeline management', 'Editorial workflows', 'Content writing and editing', 'SEO tools', 'Buffer', 'Google Analytics'] },
-    { group: 'Pipeline and outreach', items: ['Lead and partner research', 'Lead qualification', 'Pipeline management', 'LinkedIn outreach', 'Dripify', 'LinkedIn Sales Navigator', 'Apollo'] },
-    { group: 'AI and automation', items: ['ChatGPT', 'Claude', 'ClickUp AI', 'AI workflow mapping', 'ClickUp automations'] },
-    { group: 'Operations and tools', items: ['ClickUp', 'Slack', 'Workflow design', 'Process documentation', 'Website quality checks'] },
-    { group: 'Data and compliance', items: ['Health data validation', 'R programming', 'HTML/CSS', 'SOC 2 compliance analysis'] },
+    { group: 'Marketing operations',
+      does: ['Content pipeline management', 'Editorial workflows', 'Content writing and editing'],
+      tools: ['Buffer', 'GA4'] },
+    { group: 'Pipeline and outreach',
+      does: ['Lead and partner research', 'Lead qualification', 'Pipeline management', 'Competitive research and teardowns', 'Outreach sequencing and replies'],
+      tools: ['Dripify', 'LinkedIn Sales Navigator', 'Apollo'] },
+    { group: 'AI and automation',
+      does: ['AI workflow mapping'],
+      tools: ['Claude', 'ClickUp AI'] },
+    { group: 'Operations and process',
+      does: ['Workflow design', 'Process documentation', 'Website quality checks'],
+      tools: ['ClickUp', 'GitHub', 'Lighthouse'] },
+    { group: 'Data and code',
+      does: ['Health data validation'],
+      tools: ['R', 'HTML/CSS'] },
   ],
   learning: 'Microsoft SC-300 and SC-200', // shown under the skills as "currently learning"
 
