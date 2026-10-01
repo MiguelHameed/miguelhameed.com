@@ -91,13 +91,12 @@ window.SITE = {
       org: 'Cloud Sentry Solutions',
       logo: 'images/logos/cloud-sentry.png', // their own mark, from cloudsentry.com (Miguel, 29 Sep)
       place: 'New Hampshire, New England',
-      dates: 'April 2025 – Present', // alongside DOH until Jan 2026
+      dates: 'April, 2025 – Present', // alongside DOH until Jan 2026
       points: [
-        'Audited 23 partner records across three lists in a day, wrote 21 dated notes, and brought eighteen stale records back inside the 14-day rule.',
-        'Built the sales-enablement pack in two days: four competitor teardowns, a battlecard, six objection scripts, a one-pager, a win/loss spec and a decision memo.',
-        'Wrote 24 articles for the company blog, then reviewed and annotated the full 72-post corpus.',
-        'Shipped ten pull requests to the marketing site in one week, backed by twelve Lighthouse audits and a 41-page crawl at phone width.',
-        'Built Cloud Sentry\u2019s ClickUp super agents and two AI Skills, demoed both to the team, and hold the open audit into workspace AI credit use.',
+        'ClickUp workspace architecture for Service Pyramid delivery.',
+        'Automation of recurring L1 controls monitoring (onboarding, access reviews, evidence collection).',
+        'Standard Operations Procedure and runbook authoring for client delivery.',
+        'Cross-tool integration (ClickUp, identity tools, DLP, audit tooling).',
       ],
     },
     {
@@ -105,36 +104,110 @@ window.SITE = {
       org: 'Department of Health – Metro Manila Center for Health Development',
       logo: 'images/logos/doh.png', // official DOH seal (Wikimedia Commons)
       place: 'Mandaluyong City, Philippines',
-      dates: 'April 2025 – January 2026',
+      dates: 'April, 2025 – January, 2026',
+      certificates: [
+        {
+          title: 'Certificate of Completion of the Field Health Services and Information System Data Management and Analysis Training',
+          date: 'August, 2025',
+          note: 'Developed technical skills in organising, validating, and maintaining structured health data for administrative reporting.',
+        },
+        {
+          title: 'Certificate of Completion for Data Quality Check Training: Critical Program for Universal Health Care Coverage',
+          date: 'September, 2025',
+          note: 'Completed Data Quality Check training for the Critical Program on Universal Health Care, strengthening accuracy and validation of records.',
+        },
+        {
+          title: 'Certificate of Recognition for Workshop on Data Analysis for Different Health Programs',
+          date: 'October, 2025',
+          note: 'Demonstrated analytical skills through engagement in cross-program data interpretation and review activities.',
+        },
+      ],
       points: [
-        'Managed and validated health facility data for the Field Health Services Information System (FHSIS).',
-        'Coordinated with local health units and partner facilities for timely, complete, standardised data.',
-        'Reviewed, consolidated and analysed routine health reports to support monitoring and planning.',
+        'Managed and validated health facility data for the Field Health Services Information System (FHSIS), to support accurate regional and national health reporting.',
+        'Coordinated with local health units and partner facilities to ensure timely, complete and standardised submission of public health data.',
+        'Reviewed, consolidated and analysed routine health reports to support monitoring, planning and decision-making for public health programmes.',
       ],
     },
     {
       role: 'Project Technical Specialist I',
       org: 'DOST – Food and Nutrition Research Institute',
-      logo: 'images/logos/dost-fnri.png', // FNRI emblem, from fnri.dost.gov.ph
+      logo: 'images/logos/dost-fnri.png',
       place: 'Taguig City, Philippines',
-      dates: 'November 2023 – August 2024',
+      dates: 'September, 2023 – August, 2024',
+      ownDates: 'November, 2023 – August, 2024', // this title alone; the row header carries the whole FNRI span
       points: [
-        'Conducted data collection and validation for the National Nutrition Survey.',
-        'Collected and processed biological samples through phlebotomy; performed laboratory analysis of biochemical markers.',
+        'Conducted data collection and validation for the National Nutrition Survey, ensuring the accuracy and completeness of nutritional data.',
+        'Collected, aliquoted and processed biological fluid samples through phlebotomy, to support the analysis of biochemical markers for the survey.',
+        'Performed laboratory processing and analysis of the biochemical markers used to assess and update the nutritional status of the Filipino population nationwide.',
       ],
-    },
-    {
-      role: 'Project Technical Assistant II',
-      org: 'DOST – Food and Nutrition Research Institute',
-      logo: 'images/logos/dost-fnri.png', // FNRI emblem, from fnri.dost.gov.ph
-      place: 'Taguig City, Philippines',
-      dates: 'September – November 2023',
-      points: ['Encoded and validated National Nutrition Survey data.'],
+      earlier: {
+        role: 'Project Technical Assistant II',
+        dates: 'September – November, 2023',
+        points: [
+          'Encoded and validated the data collected throughout the National Nutrition Survey.',
+          'Received and designated the biochemical markers collected from the survey.',
+        ],
+      },
     },
   ],
 
-  education: 'BS Medical Technology, Far Eastern University Manila, 2022. Licensed.',
-  educationLogo: 'images/logos/feu.png', // official FEU seal (Wikipedia)
+  schools: [
+    {
+      school: 'Far Eastern University – Manila',
+      logo: 'images/logos/feu.png', // Miguel supplied a cleaner seal, 2 Oct 2026, replacing the Wikipedia one
+      initials: 'FEU',
+      award: 'Bachelor of Science, Major in Medical Technology',
+      place: 'Sampaloc, Manila',
+      dates: 'June, 2022',
+      note: 'Cumulative GPA: 3.34',
+      research: 'Antimicrobial Property of MgO Nanoparticles: A Narrative Review',
+      certificates: [
+        {
+          title: 'Certificate of Participation in the International Undergraduate Research Conference for Philippine Association of Schools of Medical Technology and Public Health, Inc.',
+          date: 'November, 2021',
+          note: 'Built foundational experience in academic research through involvement in an international conference on Medical Technology and Public Health.',
+        },
+      ],
+      honours: [
+        "Second Honors · Academic Year 2018 – 2019",
+        "Second Honors · Academic Year 2019 – 2020",
+        "First Honors · Academic Year 2020 – 2021",
+      ],
+    },
+    {
+      school: 'Centro Escolar University – Manila',
+      logo: 'images/logos/ceu.png', // Miguel supplied the mark, 2 Oct 2026
+      initials: 'CEU',
+      award: 'Science, Technology, Engineering and Mathematics',
+      place: 'San Miguel, Manila',
+      dates: 'June, 2018',
+      note: 'Medical Transcriptionist',
+      research: 'The Perception of Students on Self Diagnosed Clinical Depression & Anxiety: A Phenomenological Study',
+    },
+  ],
+  licence: {
+    label: 'Licensed',
+    text: 'Medical Technologist · Professional Regulation Commission · September 29, 2023',
+    certificates: [
+      {
+        title: 'Certification of Completion for NIDA Clinical Trials Network',
+        date: 'July, 2022',
+        note: 'Trained in foundational clinical research principles through the NIDA Clinical Trials Network certification program.',
+      },
+      {
+        title: 'Certification of Attendance for Transporting Dangerous Goods Training',
+        date: 'July, 2022',
+        note: 'Completed training on the safe handling, labelling, and transportation of dangerous goods in compliance with safety standards.',
+      },
+      {
+        title: 'Certificate of Completion on The Manual of Operations for Screening Drug Testing Laboratories',
+        date: 'August, 2024',
+        note: 'Completed formal training on the Manual of Operations for Screening Drug Testing Laboratories, covering compliance, workflow, and quality procedures.',
+      },
+    ],
+  },
+
+  learning: 'Microsoft SC-300 and SC-200', // shown at the foot of Education as "studying now"
 
   skills: [
     { group: 'Marketing operations',
@@ -150,7 +223,6 @@ window.SITE = {
       does: ['Workflow design', 'Process documentation', 'Website quality checks'],
       tools: ['ClickUp', 'GitHub', 'Lighthouse', 'HTML/CSS'] },
   ],
-  learning: 'Microsoft SC-300 and SC-200', // shown under the skills as "currently learning"
 
   proof: [
     {

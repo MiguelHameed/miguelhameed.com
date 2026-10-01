@@ -15,6 +15,7 @@
     { id: 'about', title: 'About', sub: 'Medical technologist to operations' },
     { id: 'skills', title: 'Skills', sub: 'What I do, and what I use' },
     { id: 'experience', title: 'Experience' },
+    { id: 'education', title: 'Education', sub: 'Where I trained' },
     { id: 'proof', title: 'Credentials', sub: 'What can be checked' },
     ...(S.testimonials.length >= 2 ? [{ id: 'testimonials', title: 'Testimonials', sub: 'In their words' }] : []),
     { id: 'contact', title: 'Contact', sub: 'Find a time to talk' },
@@ -145,13 +146,29 @@
       : `<span class="org-logo org-initials" aria-hidden="true">${esc(initials || '')}</span>`;
   }
 
+  function certList(items) {
+    if (!items || !items.length) return '';
+    return `
+      <div class="role-earlier">
+        <p class="earlier-head"><span class="label">Certificates</span></p>
+        <ul class="certs">${items.map((x) => `
+          <li>
+            <p class="cert-head"><span class="cert-title">${esc(x.title)}</span><span class="cert-date">${txt(x.date)}</span></p>
+          </li>`).join('')}</ul>
+      </div>`;
+  }
+
   function experience(c) {
     const shortOrg = (o) => o.replace('Department of Health – Metro Manila Center for Health Development', 'Department of Health')
       .replace('DOST – Food and Nutrition Research Institute', 'DOST-FNRI');
-    const list = S.experience.map((e) => `
-      <li><span class="tl-role"><strong>${esc(e.role)}</strong></span><span class="tl-org">${esc(shortOrg(e.org))}</span><span class="tl-dates">${txt(e.dates)}</span></li>`).join('');
+    const positions = S.experience.flatMap((e) => [
+      { role: e.role, org: e.org, dates: e.ownDates || e.dates },
+      ...(e.earlier ? [{ role: e.earlier.role, org: e.org, dates: e.earlier.dates }] : []),
+    ]);
+    const list = positions.map((p) => `
+      <li><span class="tl-role"><strong>${esc(p.role)}</strong></span><span class="tl-org">${esc(shortOrg(p.org))}</span><span class="tl-dates">${txt(p.dates)}</span></li>`).join('');
     const summary = msg('overview', `
-      <p class="section-lede">${S.experience.length} roles, from government health research to marketing and business development.</p>
+      <p class="section-lede">${positions.length} roles, from government health research to marketing and business development.</p>
       <ul class="timeline">${list}</ul>`);
     const roles = S.experience.map((e, i) => msg(`role ${i + 1} of ${S.experience.length}`, `
       <div class="role-head role-head-multi">
@@ -162,9 +179,44 @@
           <p class="where">${esc(e.place)} · ${txt(e.dates)}</p>
         </div>
       </div>
-      <ul class="points">${e.points.map((p) => `<li>${esc(p)}</li>`).join('')}</ul>`)).join('');
-    const edu = msg('education', `<div class="role-head">${orgLogo(S.educationLogo, 'FEU', 'Far Eastern University')}<p class="org"><strong>${esc(S.education)}</strong></p></div>`);
-    return divider(c) + summary + roles + edu;
+      <ul class="points">${e.points.map((p) => `<li>${esc(p)}</li>`).join('')}</ul>
+      ${certList(e.certificates)}
+      ${e.earlier ? `
+      <div class="role-earlier">
+        <p class="earlier-head"><span class="label">Before this</span> <strong>${esc(e.earlier.role)}</strong> &middot; ${txt(e.earlier.dates)}</p>
+        <ul class="points">${e.earlier.points.map((p) => `<li>${esc(p)}</li>`).join('')}</ul>
+      </div>` : ''}`)).join('');
+    return divider(c) + summary + roles;
+  }
+
+  function education(c) {
+    const noteHtml = (t) => {
+      const i = t.indexOf(':');
+      return i === -1 ? esc(t) : `${esc(t.slice(0, i + 1))} <strong>${esc(t.slice(i + 1).trim())}</strong>`;
+    };
+    const schools = S.schools.map((e, i) => msg(`school ${i + 1} of ${S.schools.length}`, `
+      <div class="role-head role-head-multi role-head-school">
+        ${orgLogo(e.logo, e.initials, e.school)}
+        <div>
+          <h3 class="work-title">${esc(e.school)}</h3>
+          <p class="org">${esc(e.award)}</p>
+          <p class="where">${esc(e.place)} &middot; ${txt(e.dates)}</p>
+        </div>
+      </div>
+      ${e.note ? `<p class="school-note">${noteHtml(e.note)}</p>` : ''}
+      ${e.research ? `
+      <p class="school-line"><span class="label">Research</span> <strong>${esc(e.research)}</strong></p>` : ''}
+      ${(e.honours || []).length ? `
+      <div class="school-line"><span class="label">Dean's Lister</span>
+        <ul class="honours">${e.honours.map((h) => `<li>${esc(h)}</li>`).join('')}</ul>
+      </div>` : ''}
+      ${certList(e.certificates)}`)).join('');
+    const lic = S.licence ? msg('licence', `
+      <p class="school-line"><span class="label">${esc(S.licence.label)}</span> ${esc(S.licence.text)}</p>
+      ${certList(S.licence.certificates)}`) : '';
+    const now = S.learning ? msg('next', `
+      <p class="school-line"><span class="label">Studying now</span> ${esc(S.learning)}</p>`) : '';
+    return divider(c) + schools + lic + now;
   }
 
   function skills(c) {
@@ -179,8 +231,7 @@
           ${tools.length ? `<p class="skill-tools"><span class="label">Tools</span> ${tools.map(esc).join(' &middot; ')}</p>` : ''}
         </div>
       </li>`;
-    }).join('')}</ul>` + (S.learning ? `
-      <p class="learning"><span class="label">Currently learning</span> ${esc(S.learning)}</p>` : ''));
+    }).join('')}</ul>`);
   }
 
   const hasSheet = (p) => Boolean(p.image || (p.meta && p.meta.length) || (p.story && p.story.length));
@@ -246,7 +297,7 @@
       </figure>`).join('')}</div>`;
   }
 
-  const builders = { 'selected-work': selectedWork, experience, skills, proof, testimonials, about, contact };
+  const builders = { 'selected-work': selectedWork, experience, skills, education, proof, testimonials, about, contact };
   const feed = $('#feed');
   const scrollChannels = CHANNELS.filter((c) => !c.view);
   const workChannel = CHANNELS.find((c) => c.view);
