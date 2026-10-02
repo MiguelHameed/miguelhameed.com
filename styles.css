@@ -8,7 +8,7 @@
    and a clear sea-blue accent that reads well on dark water. */
 :root,
 [data-theme="dark"] {
-  --desk: #151a1d;
+  --desk: #0a0e10;
   --desk-dot: rgba(200, 220, 228, 0.06);
   --app: #0f1518;
   --app-bar: #11171a;
@@ -38,7 +38,7 @@
 
 /* Burgundy (trial, 22 Sep): deep wine instead of deep ocean, warm light from above, soft gold accent. */
 [data-theme="burgundy"] {
-  --desk: #1b1413;
+  --desk: #0d0a09;
   --mark: #8d4536;         /* the mh mark in the photograph's rose instead of blue */
   --desk-dot: rgba(255, 225, 218, 0.055);
   --app: #15100f;
@@ -120,15 +120,10 @@ body {
   line-height: 1.55;
   color: var(--ink);
   background-color: var(--desk);
-  /* The desk: Miguel's photograph, with the theme's own glow laid over it so blue stays blue and wine
-     stays wine. The dot grid comes off — a texture over a photograph is two textures. */
-  /* The photograph, and nothing over it (Miguel, 1 Oct). A glow made the window look as though it were
-     emitting light; a tint on top made the picture nearly black. It just sits there now, like Bailey's. */
-  background-image: url('images/desk/mountains.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  /* The desk is the theme's own colour (Miguel, 2 Oct): "match the background into the color of the
+     website for now". Flat colour is perfectly sharp at any screen size and costs nothing to load,
+     which is the whole reason baileyelith.com's page sits on flat black.
+     The illustration is still in images/desk/ — putting it back is this one rule. */
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.3s;
 }
@@ -186,7 +181,9 @@ svg { width: 20px; height: 20px; fill: currentColor; }
     "bar bar bar"
     "rail side pane";
   background: var(--app);
-  /* A real window edge: a faint light ring rather than a hard hairline, and a wider corner. */
+  /* A real window edge: a faint light ring, catching light the way a window would. It read as a glow
+     only while the desk was LIGHTER than the window; with the desk darkened below it (2 Oct) the ring
+     does its job again and Miguel kept it. */
   border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: var(--r-xl);
   box-shadow: var(--shadow);
