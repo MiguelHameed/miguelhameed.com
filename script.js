@@ -11,14 +11,14 @@
     : esc(t);
 
   const CHANNELS = [
-    ...(S.selectedWork.length ? [{ id: 'selected-work', title: 'Work', sub: 'What I finished, and what changed', view: true }] : []),
-    { id: 'about', title: 'About', sub: 'Medical technologist to operations' },
-    { id: 'skills', title: 'Skills', sub: 'What I do, and what I use' },
+    ...(S.selectedWork.length ? [{ id: 'selected-work', title: 'Projects', sub: 'One of these is the page you’re on.', view: true }] : []),
+    { id: 'about', title: 'About', sub: 'Trained in science, ended up in systems' },
+    { id: 'skills', title: 'Skills', sub: 'This is the list, minus the ones that I’d have to google.' },
     { id: 'experience', title: 'Experience' },
-    { id: 'education', title: 'Education', sub: 'Where I trained' },
-    { id: 'proof', title: 'Credentials', sub: 'What can be checked' },
+    { id: 'education', title: 'Education' },
+    { id: 'proof', title: 'Credentials', sub: 'Click it, I’ll wait.' },
     ...(S.testimonials.length >= 2 ? [{ id: 'testimonials', title: 'Testimonials', sub: 'In their words' }] : []),
-    { id: 'contact', title: 'Contact', sub: 'Find a time to talk' },
+    { id: 'contact', title: 'Contact', sub: 'Yes, that’s my actual email.' },
   ];
 
   const ICONS = {
@@ -42,7 +42,7 @@
   $('#app-list').innerHTML = APPS.map((a) =>
     `<li><a class="side-link" href="${esc(a.href)}"${a.ext ? ' target="_blank" rel="noopener"' : ''}><span class="app-icon app-${a.icon}">${ICONS[a.icon]}</span>${a.label}${a.ext ? '<span class="ext" aria-hidden="true">↗</span>' : ''}</a></li>`
   ).join('');
-  const SITE_ROOT = location.pathname.replace(/index\.html$/, '').replace(/work\/?$/, '').replace(/\/?$/, '/');
+  const SITE_ROOT = location.pathname.replace(/index\.html$/, '').replace(/(?:projects|work)\/?$/, '').replace(/\/?$/, '/');
   const asset = (u) => (!u || /^([a-z]+:)?\/\//i.test(u) || u.startsWith('/') || u.startsWith('data:') ? u : SITE_ROOT + u);
 
   const avatarEl = (cls, alt) => P.avatar
@@ -66,7 +66,7 @@
     </article>`;
   const divider = (c) => `
     <h2 class="channel-divider" id="${c.id}" data-section="${c.id}">
-      <span class="hash">#</span>${c.title}${c.sub ? `<span class="divider-sub">${esc(c.sub)}</span>` : ''}
+      <span class="hash">#</span>${c.title}${c.sub ? `<span class="divider-sub"><span class="divider-dash" aria-hidden="true">—</span> ${esc(c.sub)}</span>` : ''}
     </h2>`;
   const buttons = (attr = '', withLinkedIn = true) => `
     <div class="actions" ${attr}>
@@ -117,10 +117,11 @@
     return divider(c) + S.selectedWork.map((w, i) => {
       const meta = [w.year, ...(w.tags || [])].filter(Boolean).map(esc).join(' &middot; ');
       const rows = [
-        ['Result', w.result], ['What I own', w.owns], ['Where it stops', w.stops],
+        ['What it is', w.what], ['What I built', w.built], ['Result', w.result],
+        ['What I own', w.owns], ['Where it stops', w.stops],
         ['Problem', w.problem], ['What I did', w.did],
-      ].filter(([, v]) => v).map(([k, v]) => `
-        <p class="school-line"><span class="label">${k}</span> ${esc(v)}</p>`).join('');
+      ].filter(([, v]) => v && txt(v)).map(([k, v]) => `
+        <p class="school-line"><span class="label">${k}</span> ${txt(v)}</p>`).join('');
       const specs = (w.specs || []).map((sp) => `${esc(sp.value)} <span class="spec-of">${esc(sp.label)}</span>`).join(' &middot; ');
       return msg(`work ${i + 1} of ${n}`, `
       <h3 class="work-title">${esc(w.title)}</h3>
@@ -160,7 +161,7 @@
     const list = positions.map((p) => `
       <li><span class="tl-role"><strong>${esc(p.role)}</strong></span><span class="tl-org">${esc(shortOrg(p.org))}</span><span class="tl-dates">${txt(p.dates)}</span></li>`).join('');
     const summary = msg('overview', `
-      <p class="section-lede">${positions.length} roles, from government health research to technical operations.</p>
+      <p class="section-lede">${positions.length} roles, from government health programmes to technical operations.</p>
       <ul class="timeline">${list}</ul>`);
     const roles = S.experience.map((e, i) => msg(`role ${i + 1} of ${S.experience.length}`, `
       <div class="role-head role-head-multi">
@@ -279,7 +280,10 @@
         <!-- "local time" said what "based in" already said. The offset lets anyone work out the gap
              without arithmetic; the clock saves them doing it at all. -->
         <li><span class="label">Based in</span><span>${esc(P.location)} (UTC+8) · <span data-clock>${manilaTime()}</span></span></li>
-        <li><span class="label">Status</span><span><i class="dot-good"></i> ${esc(P.availability)}</span></li>
+        <!-- No dot here (Miguel, 2 Oct). The label already says "Status" and the words already say he is
+             open, so the marker was the third thing saying one fact — and green is the only green in
+             the pane. The sidebar keeps its dot: there the chat metaphor earns it. -->
+        <li><span class="label">Status</span><span>${esc(P.availability)}</span></li>
       </ul>
       ${buttons('data-contact-actions', false)}`) + `<p class="end">— end of conversation —</p>`;
   }
@@ -327,7 +331,7 @@
   }
   $$('[data-view-back]').forEach((b) => b.addEventListener('click', () => { history.back(); }));
 
-  const VIEW_PATH = { 'selected-work': 'work/' };
+  const VIEW_PATH = { 'selected-work': 'projects/' };
   const ROOT = SITE_ROOT;
   const urlFor = (id) => ROOT + (id && VIEW_PATH[id] ? VIEW_PATH[id] : '');
   const viewFromPath = () => {
