@@ -98,11 +98,12 @@
               <p class="lede"><span class="before">${esc(P.storyStart)}</span> ${esc(P.story)}</p>
               ${S.tags && S.tags.length ? `<p class="hash-tags">${S.tags.map((t) => `<span class="hash-tag mono">#${esc(t)}</span>`).join('')}</p>` : ''}
               ${buttons('data-intro-actions')}
+              ${S.highlights && S.highlights.length ? `
               <ul class="highlights">${S.highlights.map((h) => (typeof h === 'string'
                 ? `<li>${esc(h)}</li>`
                 : `<li>${h.href
                     ? `<a class="hook" href="${esc(h.href)}">${esc(h.hook)}</a>`
-                    : `<span class="hook">${esc(h.hook)}</span>`}: ${esc(h.line)}</li>`)).join('')}</ul>
+                    : `<span class="hook">${esc(h.hook)}</span>`}: ${esc(h.line)}</li>`)).join('')}</ul>` : ''}
             </div>
             <!-- Photo removed 1 Oct at Miguel's request. introPhoto() is still defined; put it back here. -->
           </div>
@@ -302,8 +303,10 @@
   const workChannel = CHANNELS.find((c) => c.view);
   const workRow = workChannel ? `
     <a class="section-row" href="#${workChannel.id}">
-      <span class="section-row-label">${esc(workChannel.title)}</span>
-      <span class="section-row-title">${esc(COUNT_WORDS[S.projects.length] || S.projects.length)} ${esc(S.workSetName || '')}</span>
+      <!-- Just the channel name (Miguel, 3 Oct). It used to be a small grey label with a separate title
+           beside it; the title said "Two projects", which told a reader nothing, and once that came off
+           the row looked unfinished. The name sits in the title position now and the row is a door. -->
+      <span class="section-row-title">${esc(workChannel.title)}</span>
       <span class="section-row-go">Open &rarr;</span>
     </a>` : '';
   feed.innerHTML = intro() + workRow + scrollChannels.map((c) => builders[c.id](c)).join('');
