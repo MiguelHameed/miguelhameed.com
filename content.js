@@ -24,16 +24,16 @@ window.SITE = {
   tags: ['marketing-operations', 'business-development', 'ai-workflows'],
 
   highlights: [
-    { hook: 'Five workstreams, one desk', line: 'partnerships, the website, competitive intelligence, content, outbound.', href: '#selected-work' },
-    { hook: 'Owned end to end', line: 'research, enrichment, briefs and sequencing, handed over ready to send.', href: '#selected-work' },
-    { hook: 'House rules', line: 'I wrote the operating agreement the work runs on.', href: '#selected-work' },
-    { hook: 'Order restored', line: 'a partner pipeline untouched since April, current again in a day.', href: '#selected-work' },
-    { hook: 'First pass, last word', line: 'AI drafts the repetitive part; I review everything before it ships.', href: '#selected-work' },
+    { hook: 'Five workstreams, one desk', line: 'partnerships, the website, competitive intelligence, content, outbound.', href: '#projects' },
+    { hook: 'Owned end to end', line: 'research, enrichment, briefs and sequencing, handed over ready to send.', href: '#projects' },
+    { hook: 'House rules', line: 'I wrote the operating agreement the work runs on.', href: '#projects' },
+    { hook: 'Order restored', line: 'a partner pipeline untouched since April, current again in a day.', href: '#projects' },
+    { hook: 'First pass, last word', line: 'AI drafts the repetitive part; I review everything before it ships.', href: '#projects' },
   ],
 
   workSetName: 'projects',
 
-  selectedWork: [
+  projects: [
     {
       title: 'MAPA',
       year: 'In progress · my own project',
@@ -183,8 +183,6 @@ window.SITE = {
     ],
   },
 
-  learning: 'Microsoft SC-300 and SC-200', // shown at the foot of Education as "studying now"
-
   skills: [
     { group: 'Marketing operations',
       does: ['Content pipeline management', 'Editorial workflows', 'Content writing and editing'],
@@ -200,7 +198,7 @@ window.SITE = {
       tools: ['ClickUp', 'GitHub', 'Lighthouse', 'HTML/CSS'] },
   ],
 
-  proof: [
+  credentials: [
     {
       kind: 'Certification', title: 'Certified ClickUp Expert',
       topic: "ClickUp's own certification, June 2025. It's the system five of my workstreams run on.",
@@ -219,6 +217,10 @@ window.SITE = {
         'I took the certification in June 2025. Since then I have built the super agents the team uses, written two AI Skills, and taken on the audit into the workspace’s AI credit use.',
       ],
     },
+    { kind: 'In progress · Microsoft', title: 'SC-300: Identity and Access Administrator',
+      logo: 'images/logos/sc-300.png', topic: 'Exam not yet taken.' },
+    { kind: 'In progress · Microsoft', title: 'SC-200: Security Operations Analyst',
+      logo: 'images/logos/sc-200.png', topic: 'Exam not yet taken.' },
   ],
 
   files: [],
