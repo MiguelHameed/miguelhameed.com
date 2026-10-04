@@ -41,9 +41,9 @@ window.SITE = {
       what: 'The site you are reading. Plain HTML, CSS and JavaScript, no framework, hosted on GitHub Pages.',
       built: 'I set the direction, wrote the words, and reviewed every change on a staging copy before it reached the live domain.',
       specs: [
-        { value: 'Staging first', label: 'nothing ships unreviewed' },
-        { value: '16', label: 'automated checks per release' },
-        { value: '100', label: 'accessibility and SEO' },
+        { value: 'Staged releases', label: 'every change reviewed on a copy first' },
+        { value: 'Regression suite', label: '16 checks, run against the real site' },
+        { value: 'Lighthouse 100', label: 'accessibility and SEO' },
       ],
     },
   ],
@@ -195,7 +195,7 @@ window.SITE = {
   credentials: [
     {
       kind: 'Certification', title: 'Certified ClickUp Expert',
-      topic: "ClickUp's own certification, June 2025. It's the system five of my workstreams run on.",
+      topic: "ClickUp's own certification. It is the system my work runs on.",
       logo: 'images/logos/clickup.png',
       link: 'https://verify.skilljar.com/c/8a2eyxevcezx',
       linkLabel: 'Verify on Skilljar',
@@ -207,8 +207,8 @@ window.SITE = {
         { label: 'Certificate', value: '8a2eyxevcezx' },
       ],
       story: [
-        'ClickUp is where my work actually happens. Everything I run lives in one workspace, so knowing the tool properly is not optional. It is the difference between a system that holds and one that quietly drifts.',
-        'I took the certification in June 2025. Since then I have built agents, written two AI Skills, and run an audit into how AI credits get used.',
+        'ClickUp is where my work actually happens, and I took the certification in June 2025. Everything I run lives in one workspace, so knowing the tool properly is not optional. It is the difference between a system that holds and one that quietly drifts.',
+        'Since then it has mostly been the structure: how a workspace is laid out, what runs automatically, what connects out to the other tools people are already in. Agents and AI Skills sit on top of that, and someone has to watch what they cost to run. Done properly none of it is noticeable, which is the whole idea.',
       ],
     },
     { kind: 'In progress · Microsoft', title: 'SC-300: Identity and Access Administrator',
