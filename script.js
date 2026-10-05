@@ -71,8 +71,8 @@
   const buttons = (attr = '', withLinkedIn = true) => `
     <div class="actions" ${attr}>
       ${S.showCv === false ? '' : `<a class="btn btn-primary" href="${esc(P.cv)}" target="_blank" rel="noopener">Download CV</a>`}
-      <a class="btn ${S.showCv === false ? 'btn-primary' : ''}" href="mailto:${esc(P.email)}">Let's find a time!</a>
-      ${withLinkedIn ? `<a class="btn" href="${esc(P.linkedin)}" target="_blank" rel="noopener">LinkedIn ↗</a>` : ''}
+      <a class="btn ${S.showCv === false ? 'btn-primary' : ''}" href="mailto:${esc(P.email)}">What's the project?</a>
+      ${withLinkedIn ? `<a class="btn btn-brand" href="${esc(P.linkedin)}" target="_blank" rel="noopener">LinkedIn<svg class="btn-arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/></svg></a>` : ''}
     </div>`;
 
   function introPhoto() {
@@ -464,7 +464,7 @@
   const floatX = $('#float-x');
   floatLink.href = 'mailto:' + P.email;
   floatLink.innerHTML = `<span class="float-app">${ICONS.email}</span>`
-    + `<span class="float-text"><strong>Let's find a time!</strong><span class="float-sub">${esc(P.email)}</span></span>`
+    + `<span class="float-text"><strong>What's the project?</strong><span class="float-sub">${esc(P.email)}</span></span>`
     + `<span class="float-when">now</span>`;
   $$('[data-mail]').forEach((a) => { a.href = 'mailto:' + P.email; });
   let floatDismissed = false;
