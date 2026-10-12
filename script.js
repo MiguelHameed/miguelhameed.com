@@ -324,12 +324,38 @@
   const feed = $('#feed');
   const scrollChannels = CHANNELS.filter((c) => !c.view);
   const workChannel = CHANNELS.find((c) => c.view);
+  const firstPicture = (w) => {
+    const s = w.thumb || [].concat(w.shots || [], w.shot || [])[0];
+    return s ? (typeof s === 'string' ? s : s.src) : null;
+  };
+  const pictureSizes = (w, pic) => (w.thumbLarge && pic === w.thumb
+    ? ` srcset="${esc(asset(w.thumb))} 522w, ${esc(asset(w.thumbLarge))} 780w" sizes="(max-width: 767px) 45vw, 360px"` : '');
   const workRow = workChannel ? `
-    <a class="section-row" href="#${workChannel.id}">
-      <span class="section-row-title">${esc(workChannel.title)}</span>
-      <span class="section-row-go">Open &rarr;</span>
-    </a>` : '';
+    <section class="proj-strip" aria-labelledby="proj-heading">
+      <div class="proj-head">
+        <h2 class="proj-heading" id="proj-heading">${esc(workChannel.title)}</h2>
+        <a class="proj-all" href="#${workChannel.id}">Open all <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <ul class="proj-cards">${S.projects.map((w, i) => {
+        const pic = firstPicture(w);
+        return `
+        <li>
+          <a class="proj-card" href="#${workChannel.id}" data-project="${i}">
+            ${pic
+              ? `<span class="proj-thumb"><img src="${esc(asset(pic))}"${pictureSizes(w, pic)} alt="" width="522" height="348" loading="lazy" /></span>`
+              : `<span class="proj-thumb is-name" aria-hidden="true">${esc(w.title)}</span>`}
+            <span class="proj-name">${esc(w.title)}</span>
+            ${w.year ? `<span class="proj-meta">${esc(w.year)}</span>` : ''}
+          </a>
+        </li>`;
+      }).join('')}</ul>
+    </section>` : '';
   feed.innerHTML = intro() + workRow + scrollChannels.map((c) => builders[c.id](c)).join('');
+
+  $$('.proj-thumb img').forEach((img) => {
+    const fit = () => { if (img.naturalHeight && Math.abs(img.naturalWidth / img.naturalHeight - 1.5) < 0.03) img.classList.add('is-fill'); };
+    if (img.complete) fit(); else img.addEventListener('load', fit, { once: true });
+  });
 
   const views = {};
   CHANNELS.filter((c) => c.view).forEach((c) => {
@@ -451,6 +477,8 @@
         e.preventDefault();
         history.pushState({ view: id }, '', urlFor(id));
         showView(id);
+        const entry = link.dataset.project ? views[id].querySelectorAll('.msg')[Number(link.dataset.project)] : null;
+        if (entry) entry.scrollIntoView({ block: 'start' });
       } else if (openView) {
         history.pushState({ view: null }, '', urlFor(null) + link.getAttribute('href'));
         showView(null);
