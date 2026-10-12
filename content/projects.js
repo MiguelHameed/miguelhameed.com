@@ -28,7 +28,4 @@ Object.assign(window.SITE, {
     },
   ],
 
-  files: [],
-
-  liveSites: [],
 });
