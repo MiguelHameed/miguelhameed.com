@@ -6,6 +6,10 @@
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   const esc = (t) => (t === null || t === undefined ? '' : String(t)).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const keepPlace = (name) => {
+    const m = String(name === null || name === undefined ? '' : name).match(/^(.*) (\S+ – \S+(?: \S+)?)$/);
+    return m ? `${esc(m[1])} <span class="keep">${esc(m[2])}</span>` : esc(name);
+  };
 
   const isTodo = (t) => typeof t === 'string' && /^TODO/i.test(t);
   const txt = (t) => isTodo(t)
@@ -221,7 +225,7 @@
       <div class="role-head role-head-multi role-head-school">
         ${orgLogo(e.logo, e.initials, e.school)}
         <div>
-          <h3 class="work-title">${esc(e.school)}</h3>
+          <h3 class="work-title">${keepPlace(e.school)}</h3>
           <p class="org">${esc(e.award)}</p>
           <p class="where">${esc(e.place)} &middot; ${txt(e.dates)}</p>
         </div>
@@ -443,7 +447,7 @@
     panel.hidden = true;
     panel.innerHTML = `<button class="view-back" type="button" data-view-back>← Back to messages</button>` + builders[c.id](c);
     const heading = panel.querySelector('.channel-divider');
-    if (heading) { heading.classList.add('sr-only'); }
+    if (heading) { heading.classList.add('view-heading'); }
     feed.insertAdjacentElement('afterend', panel);
     views[c.id] = panel;
   });
@@ -527,7 +531,9 @@
   function setActive(id) {
     const c = CHANNELS.find((x) => x.id === id);
     titleEl.textContent = c ? '#' + c.title : P.shortName;
-    subEl.textContent = c ? (c.sub || '') : `${P.role} · ${P.location}`;
+    subEl.dataset.kind = c ? 'channel' : 'person';
+    if (c) subEl.textContent = c.sub || '';
+    else subEl.innerHTML = `<span>${esc(P.role)}</span><span class="sub-place"> · ${esc(P.location)}</span>`;
     $$('[data-channel]').forEach((a) => a.classList.toggle('is-active', a.dataset.channel === (c ? c.id : 'intro')));
     $$('.rail-btn[data-rail]').forEach((b) => b.classList.toggle('is-active',
       c ? (c.id === 'projects' ? b.dataset.rail === 'projects' : false) : b.dataset.rail === 'home'));

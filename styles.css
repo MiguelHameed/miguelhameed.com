@@ -123,6 +123,13 @@ svg { width: 20px; height: 20px; fill: currentColor; }
   clip: rect(0 0 0 0); white-space: nowrap;
 }
 
+@media (min-width: 768px) {
+  .view-heading {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap;
+  }
+}
+
 .skip-link {
   position: fixed; left: 16px; top: -60px; z-index: 50;
   background: var(--accent); color: var(--accent-ink);
@@ -551,6 +558,8 @@ a.hook:hover, a.hook:focus-visible { border-bottom-color: var(--accent); color: 
 .spec-chips { display: flex; flex-wrap: wrap; gap: 6px; padding-top: 1px; }
 .spec-chip { padding: 2px 10px; border-radius: var(--r-pill); border: 1px solid var(--line); background: var(--card); color: var(--ink); font-size: var(--t-sm); letter-spacing: 0.01em; white-space: nowrap; }
 .work-title { font-family: var(--display); font-weight: 600; font-size: var(--t-lg); letter-spacing: var(--track-head); line-height: 1.3; margin: 2px 0 8px; }
+
+.work-title .keep { white-space: nowrap; }
 .work-pending { margin: -4px 0 14px; font-size: var(--t-md); }
 
 .shots { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
@@ -843,6 +852,12 @@ body.sheet-open { overflow: hidden; }
   }
   .pane-head .pane-h { color: var(--chrome-ink); }
   .pane-head #pane-sub { color: var(--chrome-muted); }
+
+  .pane-head #pane-sub[data-kind="channel"] { display: none; }
+  .pane-head #pane-sub .sub-place { display: none; }
+  .channel-view .view-heading { margin-top: 14px; }
+
+  .pane-head { min-height: 68px; }
   .pane-head .menu-btn,
   .pane-head .mob-mail,
   .pane-head .mob-theme { color: var(--chrome-accent); }
@@ -887,8 +902,14 @@ body.sheet-open { overflow: hidden; }
   .mob-mail + .mob-theme { margin-left: 0; }
 }
 
-@media (max-width: 370px) {
+@media (max-width: 400px) {
   .pane-head { gap: 6px; padding-left: 8px; padding-right: 8px; }
+}
+@media (max-width: 370px) {
+  .pane-head #pane-sub { font-size: 0.725rem; }
+}
+@media (max-width: 355px) {
+  .pane-head #pane-sub { display: none; }
 }
 @media (max-width: 340px) {
   .pane-title .pane-h { font-size: 0.95rem; }
