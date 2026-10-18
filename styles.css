@@ -109,6 +109,40 @@ body {
   transition: background-color 0.3s;
 }
 
+html[data-theme="dark"] body {
+  background-image: image-set(url('images/desk/slate-2560.avif') type('image/avif'),
+                              url('images/desk/slate-2560.jpg') type('image/jpeg'));
+}
+html[data-theme="burgundy"] body {
+  background-image: image-set(url('images/desk/ember-2560.avif') type('image/avif'),
+                              url('images/desk/ember-2560.jpg') type('image/jpeg'));
+}
+@media (min-width: 2561px), (min-resolution: 1.5dppx) {
+  html[data-theme="dark"] body {
+    background-image: image-set(url('images/desk/slate-3840.avif') type('image/avif'),
+                                url('images/desk/slate-2560.jpg') type('image/jpeg'));
+  }
+  html[data-theme="burgundy"] body {
+    background-image: image-set(url('images/desk/ember-3840.avif') type('image/avif'),
+                                url('images/desk/ember-2560.jpg') type('image/jpeg'));
+  }
+}
+@media (min-width: 3841px), (min-resolution: 1.5dppx) and (min-width: 2561px), (min-resolution: 2dppx) and (min-width: 1921px) {
+  html[data-theme="dark"] body {
+    background-image: image-set(url('images/desk/slate-5120.avif') type('image/avif'),
+                                url('images/desk/slate-2560.jpg') type('image/jpeg'));
+  }
+  html[data-theme="burgundy"] body {
+    background-image: image-set(url('images/desk/ember-5120.avif') type('image/avif'),
+                                url('images/desk/ember-2560.jpg') type('image/jpeg'));
+  }
+}
+html[data-theme] body {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 a { color: inherit; }
 img { display: block; max-width: 100%; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
@@ -833,6 +867,8 @@ body.sheet-open { overflow: hidden; }
   .intro-photo .empty-title { font-size: var(--t-sm); }
   .intro-photo .empty-note { display: none; }
   body { background-image: none; background-color: var(--app); }
+
+  html[data-theme] body { background-image: none; }
   .desk { display: block; padding: 0; }
   .app {
     display: block; height: auto; min-height: 100vh;
